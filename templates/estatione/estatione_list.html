@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}基站管理{% endblock %}
+
+{% block navbar_title %}基站管理系统{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .btn-danger {
+        background-color: #dc3545 !important;
+        border-color: #dc3545 !important;
+        color: #fff !important;
+    }
+    .btn-danger:hover {
+        background-color: #bb2d3b !important;
+        border-color: #b02a37 !important;
+        color: #fff !important;
+    }
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .status-online {
+        background-color: #dcfce7;
+        color: #16a34a;
+    }
+    .status-offline {
+        background-color: #fee2e2;
+        color: #dc2626;
+    }
+    .status-checking {
+        background-color: #e5e7eb;
+        color: #4b5563;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-header d-flex justify-content-between align-items-center border-bottom mb-3">
+    <h1 class="h2 py-3 mb-0">基站管理</h1>
+    <a href="{{ url_for('estatione.create') }}" class="btn btn-primary h-fit">
+        <i class="bi bi-plus"></i> 添加基站
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>MAC ID</th>
+                <th>IP地址</th>
+                <th>位置</th>
+                <th>描述</th>
+                <th>所属公司</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device in devices %}
+            <tr>
+                <td>{{ device.mac_id }}</td>
+                <td>{{ device.ip_address }}</td>
+                <td>{{ device.location }}</td>
+                <td>{{ device.description }}</td>
+                <td>{{ device.company.name }}</td>
+                <td>
+                    <span id="status-{{ device.id }}" class="status-badge">
+                        检测中...
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ url_for('estatione.edit', device_id=device.id) }}" class="btn btn-sm btn-primary me-2">
+                        <i class="bi bi-pencil"></i> 编辑
+                    </a>
+                    <form action="{{ url_for('estatione.delete', device_id=device.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('确定要删除该基站吗？');">
+                            <i class="bi bi-trash"></i> 删除
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 检测设备在线状态
+    function checkDeviceStatus(deviceId, ipAddress) {
+        const statusElement = document.getElementById(`status-${deviceId}`);
+        statusElement.className = 'status-badge status-checking';
+        statusElement.textContent = '检测中...';
+
+        // 修改API路径，添加完整的路由前缀
+        fetch(`/estatione/api/ping?ip=${ipAddress}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'online') {
+                    statusElement.className = 'status-badge status-online';
+                    statusElement.textContent = '在线';
+                } else {
+                    statusElement.className = 'status-badge status-offline';
+                    statusElement.textContent = '离线';
+                }
+            })
+            .catch((error) => {
+                console.error('检测错误:', error);
+                statusElement.className = 'status-badge status-offline';
+                statusElement.textContent = '检测失败';
+            });
+    }
+
+    // 页面加载完成后检测所有设备状态
+    document.addEventListener('DOMContentLoaded', function() {
+        {% for device in devices %}
+            checkDeviceStatus({{ device.id }}, '{{ device.ip_address }}');
+        {% endfor %}
+    });
+
+    // 添加刷新按钮事件
+    function refreshAllStatus() {
+        {% for device in devices %}
+            checkDeviceStatus({{ device.id }}, '{{ device.ip_address }}');
+        {% endfor %}
+    }
+
+    // 添加刷新按钮
+    document.getElementById('refresh-status').addEventListener('click', refreshAllStatus);
+</script>
+{% endblock %}

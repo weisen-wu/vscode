@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}添加灯条{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header">
+        <h1 class="page-title">添加新灯条</h1>
+    </div>
+    
+    <div class="form-layout">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="mac_address">MAC地址</label>
+                <input type="text" class="form-control {% if 'mac_address' in errors %}is-invalid{% endif %}" 
+                       id="mac_address" name="mac_address" value="{{ request.form.mac_address }}" required>
+                {% if 'mac_address' in errors %}
+                <div class="invalid-feedback">
+                    {{ errors.mac_address }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="work_order">工单号</label>
+                <input type="text" class="form-control {% if 'work_order' in errors %}is-invalid{% endif %}" 
+                       id="work_order" name="work_order" value="{{ request.form.work_order }}" required>
+                {% if 'work_order' in errors %}
+                <div class="invalid-feedback">
+                    {{ errors.work_order }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="last_estatione_mac">最后一次基站MAC</label>
+                <input type="text" class="form-control" id="last_estatione_mac" name="last_estatione_mac" value="{{ request.form.last_estatione_mac }}">
+            </div>
+
+            <div class="form-group">
+                <label for="operator_name">操作者</label>
+                <input type="text" class="form-control" id="operator_name" value="{{ current_user.username }}" readonly>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">添加灯条</button>
+                <a href="{{ url_for('lightstrip.list') }}" class="btn btn-secondary">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

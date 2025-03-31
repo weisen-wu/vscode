@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}操作日志{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+    .btn-danger:hover {
+        background-color: #bb2d3b;
+        border-color: #b02a37;
+    }
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .content-header h1 {
+        margin-bottom: 1rem;
+    }
+    
+    .content-header form {
+        width: 100%;
+        margin-top: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="content-header border-bottom">
+        <h1 class="h2 py-2 mb-0">操作日志</h1>
+        <form class="d-flex flex-wrap gap-2 mt-3" method="GET">
+            <div class="input-group">
+                <span class="input-group-text">开始时间</span>
+                <input type="date" class="form-control" name="start_date" value="{{ request.args.get('start_date', '') }}">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">结束时间</span>
+                <input type="date" class="form-control" name="end_date" value="{{ request.args.get('end_date', '') }}">
+            </div>
+            <select class="form-select" name="operation_type">
+                <option value="">所有操作</option>
+                <option value="create" {% if request.args.get('operation_type') == 'create' %}selected{% endif %}>新增</option>
+                <option value="delete" {% if request.args.get('operation_type') == 'delete' %}selected{% endif %}>删除</option>
+            </select>
+            <button type="submit" class="btn btn-primary">筛选</button>
+        </form>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-striped table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>操作时间</th>
+                    <th>操作类型</th>
+                    <th>操作者</th>
+                    <th>MAC地址</th>
+                    <th>工单号</th>
+                    <th>详情</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.operation_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>
+                        {% if log.operation_type == 'create' %}
+                        <span class="badge bg-success">新增</span>
+                        {% else %}
+                        <span class="badge bg-danger">删除</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ log.operator_name }}</td>
+                    <td>{{ log.mac_address }}</td>
+                    <td>{{ log.work_order }}</td>
+                    <td>{{ log.details or '-' }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ log.id }})">
+                            <i class="bi bi-trash"></i> 删除
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function confirmDelete(id) {
+    if (confirm('确定要删除这条日志记录吗？')) {
+        fetch(`/logs/delete/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert('删除失败，请重试');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('删除失败，请重试');
+        });
+    }
+}
+</script>
+{% endblock %}

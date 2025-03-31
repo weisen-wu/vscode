@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}批量导入灯条{% endblock %}
+
+{% block content %}
+<div class="content-header d-flex justify-content-between align-items-center border-bottom mb-3">
+    <h1 class="h2 py-3 mb-0">批量导入灯条</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="mb-4">
+            <h5 class="mb-3">导入说明</h5>
+            <p>请下载导入模板，按照模板格式填写数据后上传。</p>
+            <p>导入字段：MAC地址、工单号、所属公司</p>
+            <a href="#" id="downloadTemplate" class="btn btn-outline-primary">
+                <i class="bi bi-download"></i> 下载模板
+            </a>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="mb-3">选择文件</h5>
+            <form id="importForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <input class="form-control" type="file" id="importFile" accept=".xlsx" required>
+                    <div class="invalid-feedback">
+                        请选择Excel文件
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-upload"></i> 开始导入
+                    </button>
+                    <a href="{{ url_for('lightstrip.list') }}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> 返回列表
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script>
+// 生成Excel模板内容
+function generateExcelTemplate() {
+    const headers = ["MAC地址", "工单号", "所属公司"];
+    const example = ["AA:BB:CC:DD:EE:FF", "WO12345", "示例公司名称"];
+    
+    const ws = XLSX.utils.aoa_to_sheet([headers, example]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "灯条导入");
+    
+    // 设置列宽
+    const wscols = [
+        {wch: 20}, // MAC地址列宽
+        {wch: 15}, // 工单号列宽
+        {wch: 20}  // 所属公司列宽
+    ];
+    ws['!cols'] = wscols;
+    
+    return wb;
+}
+
+// 下载模板
+document.getElementById('downloadTemplate').addEventListener('click', function(e) {
+    e.preventDefault();
+    const wb = generateExcelTemplate();
+    XLSX.writeFile(wb, '灯条导入模板.xlsx');
+});
+
+// 处理导入表单提交
+document.getElementById('importForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.classList.add('was-validated');
+    
+    const fileInput = document.getElementById('importFile');
+    if (!fileInput.files.length) {
+        return false;
+    }
+    
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const fileData = new Uint8Array(e.target.result);
+        processExcel(fileData);
+    };
+    
+    reader.readAsArrayBuffer(file);
+});
+
+// 处理Excel数据
+function processExcel(fileData) {
+    const workbook = XLSX.read(fileData, {type: 'array'});
+    const firstSheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[firstSheetName];
+    const jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1, blankrows: false});
+    
+    if (jsonData.length < 2) { // 至少需要标题行和一行数据
+        alert('Excel文件为空或格式不正确');
+        return;
+    }
+    
+    const headers = jsonData[0];
+    
+    // 验证Excel格式
+    if (headers.length < 3 || 
+        !headers.includes('MAC地址') || 
+        !headers.includes('工单号') || 
+        !headers.includes('所属公司')) {
+        alert('Excel格式不正确，请使用提供的模板');
+        return;
+    }
+    
+    // 解析数据
+    const importData = [];
+    for (let i = 1; i < jsonData.length; i++) {
+        const row = jsonData[i];
+        // 跳过空行或所有字段为空的行
+        if (!row || row.length === 0 || row.every(cell => !cell)) continue;
+        
+        // 确保所有必填字段都有值
+        if (!row[headers.indexOf('MAC地址')] || 
+            !row[headers.indexOf('工单号')] || 
+            !row[headers.indexOf('所属公司')]) {
+            continue;
+        }
+        
+        const item = {};
+        for (let j = 0; j < headers.length; j++) {
+            item[headers[j]] = row[j] || '';
+        }
+        importData.push(item);
+    }
+    
+    if (importData.length === 0) {
+        alert('没有找到有效数据');
+        return;
+    }
+    
+    // 发送数据到服务器
+    fetch('{{ url_for("lightstrip.import_csv") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: importData })
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.status === 'success') {
+            alert('导入成功：' + result.message);
+            window.location.href = '{{ url_for("lightstrip.list") }}';
+        } else {
+            alert('导入失败：' + result.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('导入过程中发生错误');
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+/* 全局样式 */
+.uni-tabbar {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.uni-tabbar__item {
+  padding: 8px 0;
+}
+
+.uni-tabbar__icon {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.uni-tabbar__label {
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* 页面通用样式 */
+.container {
+  padding: 20px;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.function-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.function-item:active {
+  transform: scale(0.98);
+}
+
+.function-text {
+  margin-left: 15px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}

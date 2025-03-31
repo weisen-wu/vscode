@@ -1,0 +1,81 @@
+
+.login-container {
+  padding: 0.625rem 0.625rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+.logo-container {
+  margin-top: 0.625rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+.logo {
+  width: 6.875rem;
+  height: 6.875rem;
+  transition: transform 0.3s ease;
+}
+.logo:active {
+  transform: scale(0.95);
+}
+.login-form {
+  width: 100%;
+  max-width: 21.25rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  border-radius: 0.625rem;
+  box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.login-form:active {
+  transform: translateY(0.0625rem);
+  box-shadow: 0 0.125rem 0.46875rem rgba(0, 0, 0, 0.1);
+}
+
+/* 表单项样式 */
+.form-item {
+  margin-bottom: 1.25rem;
+}
+
+/* 输入框样式 */
+.form-item uni-input {
+  width: 90%;
+  height: 2.8125rem;
+  padding: 0 0.9375rem;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 输入框状态变化动画 */
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* 输入框焦点状态样式 */
+.form-item uni-input:focus {
+  border-color: #2979ff;
+  box-shadow: 0 0 0 0.0625rem rgba(41, 121, 255, 0.2); /* 焦点状态阴影效果 */
+  outline: none;
+}
+
+/* 登录按钮样式 */
+.login-btn {
+  width: 80%;
+  height: 2.8125rem;
+  line-height: 2.8125rem;
+  background: linear-gradient(135deg, #2979ff 0%, #1565c0 100%); /* 渐变背景 */
+  color: #fff;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.0625rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 按钮状态变化动画 */
+  margin-top: 0.625rem;
+}
+
+/* 按钮点击状态样式 */
+.login-btn:active {
+  transform: translateY(0.0625rem); /* 轻微下移效果 */
+  opacity: 0.9; /* 透明度变化 */
+  box-shadow: 0 0.125rem 0.46875rem rgba(41, 121, 255, 0.2); /* 点击时阴影效果 */
+}

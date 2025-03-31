@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}添加用户{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header">
+        <h1 class="page-title">添加新用户</h1>
+    </div>
+    
+    <div class="form-layout">
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="department">部门</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company_id">所属公司</label>
+                <select class="form-control" id="company_id" name="company_id" required>
+                    <option value="">请选择公司</option>
+                    {% for company in companies %}
+                    <option value="{{ company.id }}">{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="colors">灯条颜色</label>
+                <select class="form-control" id="colors" name="colors">
+                    <option value="">请选择颜色</option>
+                    <option value="red">红色</option>
+                    <option value="green">绿色</option>
+                    <option value="blue">蓝色</option>
+                    <option value="yellow">黄色</option>
+                    <option value="cyan">青色</option>
+                    <option value="purple">紫色</option>
+                    <option value="white">白色</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="time">亮灯时长（秒）</label>
+                <select class="form-control" id="time" name="time">
+                    <option value="">请选择时长</option>
+                    <option value="1">5秒</option>
+                    <option value="2">10秒</option>
+                    <option value="3">15秒</option>
+                    <option value="4">20秒</option>
+                    <option value="5">30秒</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="titles">显示标签</label>
+                <input type="text" class="form-control" id="titles" name="titles" placeholder="请输入显示标签">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">添加用户</button>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

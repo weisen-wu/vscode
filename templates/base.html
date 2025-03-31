@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}上特基站管理系统{% endblock %}</title>
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            min-height: 100vh;
+            font-family: var(--font-family);
+            background-color: var(--bg-paper);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航栏 */
+        .navbar {
+            background: var(--bg-default);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--primary-600);
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            margin-right: var(--spacing-sm);
+            color: var(--primary-500);
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            background: var(--bg-default);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            transition: transform var(--transition-duration) var(--transition-timing);
+        }
+
+        .sidebar-nav {
+            padding: var(--spacing-md);
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-duration) var(--transition-timing);
+        }
+
+        .nav-link:hover {
+            background: var(--primary-50);
+            color: var(--primary-600);
+        }
+
+        .nav-link.active {
+            background: var(--primary-100);
+            color: var(--primary-700);
+        }
+
+        .nav-link i {
+            margin-right: var(--spacing-sm);
+            font-size: var(--font-size-lg);
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            margin-left: 250px;
+            margin-top: 20px;
+            padding: var(--spacing-xl);
+            flex: 1;
+        }
+
+        /* 内容容器 */
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* 页面标题区域 */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .content-header .btn-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 0;
+        }
+
+        .form-card .card-title {
+            color: var(--primary-700);
+            font-weight: 600;
+        }
+
+        .custom-input {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            transition: all var(--transition-duration) var(--transition-timing);
+        }
+
+        .custom-input:focus {
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 2px var(--primary-100);
+        }
+
+        .custom-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-weight: 500;
+            transition: all var(--transition-duration) var(--transition-timing);
+        }
+
+        .custom-btn-secondary {
+            background-color: var(--gray-100);
+            border-color: var(--gray-300);
+            color: var(--gray-700);
+        }
+
+        .custom-btn-secondary:hover {
+            background-color: var(--gray-200);
+            border-color: var(--gray-400);
+            color: var(--gray-800);
+        }
+
+        /* 表格样式优化 */
+        .table {
+            background: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .table thead.table-light {
+            background-color: var(--gray-50);
+        }
+
+        .table th {
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom-width: 2px;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .btn-toolbar {
+            gap: var(--spacing-sm);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-600);
+            border-color: var(--primary-600);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-700);
+            border-color: var(--primary-700);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray-500);
+            border-color: var(--gray-500);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--gray-600);
+            border-color: var(--gray-600);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #bb2d3b;
+            border-color: #b02a37;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            max-width: 50%;
+            box-sizing: border-box;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-default);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-500);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-100);
+        }
+
+        .form-text {
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* 表格样式 */
+        .table {
+            background-color: var(--bg-default);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .table th {
+            background-color: var(--gray-50);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-body {
+            padding: var(--spacing-lg);
+        }
+
+        /* 卡片组件 */
+        .card {
+            background: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-duration) var(--transition-timing);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-primary {
+            background: var(--primary-500);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--gray-500);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-600);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-danger {
+            background: var(--error-600);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: var(--error-700);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* 统一表格样式 */
+        .table {
+            width: 100%;
+            background: var(--bg-default);
+            border-radius: var(--radius-lg);
+            border-collapse: collapse;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .table th,
+        .table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .table th {
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-body {
+            padding: var(--spacing-lg);
+        }
+
+        /* 卡片组件 */
+        .card {
+            background: var(--bg-default);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-duration) var(--transition-timing);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-primary {
+            background: var(--primary-500);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* 表格样式 */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .table th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: var(--bg-paper);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="bi bi-broadcast"></i>
+            <span>上特基站管理系统</span>
+        </div>
+        <div class="user-menu">
+            <span>{{ current_user.username if current_user.is_authenticated else '未登录' }}</span>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}" class="btn btn-text">退出登录</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <div class="sidebar-nav">
+            <div class="nav-item">
+                <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>仪表盘</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('estatione.list') }}" class="nav-link {% if 'estatione' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-broadcast-pin"></i>
+                    <span>基站管理</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('lightstrip.list') }}" class="nav-link {% if 'lightstrip' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-lightbulb"></i>
+                    <span>灯条管理</span>
+                </a>
+            </div>
+            {% if current_user.is_admin %}
+            <div class="nav-item">
+                <a href="{{ url_for('config.index') }}" class="nav-link {% if 'config.' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-gear"></i>
+                    <span>系统配置</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('user.list_users') }}" class="nav-link {% if 'user.' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-people"></i>
+                    <span>用户管理</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('log.list') }}" class="nav-link {% if 'log.' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>操作日志</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('company.list_companies') }}" class="nav-link {% if 'company.' in request.endpoint %}active{% endif %}">
+                    <i class="bi bi-building"></i>
+                    <span>公司管理</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        {% set category = 'danger' %}
+                    {% endif %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

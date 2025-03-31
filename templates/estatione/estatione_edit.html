@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}编辑设备{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header">
+        <h1 class="page-title">编辑设备</h1>
+    </div>
+    
+    <div class="form-layout">
+        <form method="POST">
+            <div class="form-group">
+                <label for="mac_id">MAC ID</label>
+                <input type="text" class="form-control" id="mac_id" name="mac_id" value="{{ device.mac_id }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ip_address">IP地址</label>
+                <input type="text" class="form-control" id="ip_address" name="ip_address" value="{{ device.ip_address }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">位置</label>
+                <input type="text" class="form-control" id="location" name="location" value="{{ device.location }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">描述</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ device.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="company_id">所属公司</label>
+                <select class="form-control" id="company_id" name="company_id" required>
+                    <option value="">请选择公司</option>
+                    {% for company in companies %}
+                    <option value="{{ company.id }}" {% if device.company_id == company.id %}selected{% endif %}>{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">保存修改</button>
+                <a href="{{ url_for('estatione_dashboard') }}" class="btn btn-secondary">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

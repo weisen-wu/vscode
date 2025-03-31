@@ -1,0 +1,1739 @@
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 2, in <module>
+    from app import app
+  File "D:\vscode\app.py", line 10, in <module>
+    from flask_migrate import Migrate
+  File "D:\vscode\venv\Lib\site-packages\flask_migrate\__init__.py", line 7, in <module>
+    from alembic import __version__ as __alembic_version__
+  File "D:\vscode\venv\Lib\site-packages\alembic\__init__.py", line 2, in <module>
+    from . import op
+  File "D:\vscode\venv\Lib\site-packages\alembic\op.py", line 5, in <module>
+    Operations.create_module_class_proxy(globals(), locals())
+  File "D:\vscode\venv\Lib\site-packages\alembic\util\langhelpers.py", line 97, in create_module_class_proxy
+    cls._setup_proxy(globals_, locals_, attr_names)
+  File "D:\vscode\venv\Lib\site-packages\alembic\util\langhelpers.py", line 107, in _setup_proxy
+    cls._add_proxied_attribute(methname, globals_, locals_, attr_names)
+  File "D:\vscode\venv\Lib\site-packages\alembic\util\langhelpers.py", line 120, in _add_proxied_attribute
+    locals_[methname] = cls._create_method_proxy(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\alembic\util\langhelpers.py", line 198, in _create_method_proxy
+    func_text = textwrap.dedent(
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\svadmin\AppData\Local\Programs\Python\Python312\Lib\textwrap.py", line 466, in dedent
+    text = re.sub(r'(?m)^' + margin, '', text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\svadmin\AppData\Local\Programs\Python\Python312\Lib\re\__init__.py", line 186, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+    serve(
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 15, in <module>
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_access_logger'
+2025-03-26 11:55:25,655 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:27,491 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:29,251 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:31,087 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:32,842 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:34,591 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:36,295 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:38,080 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:39,860 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:41,629 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:43,443 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:45,218 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:46,965 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:48,700 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:50,465 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:52,196 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:53,998 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:55,795 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:57,577 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:55:59,368 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:01,089 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:02,922 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:05,372 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:07,336 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:09,067 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:11,022 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:12,790 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:14,591 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:16,297 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:18,097 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:19,826 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:21,610 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:23,357 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:25,108 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:26,875 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:28,630 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:30,472 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:32,254 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:34,092 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:35,828 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:37,553 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:39,368 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:41,104 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:42,945 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:44,658 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:46,403 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:48,170 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:49,922 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:51,664 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:53,407 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:55,287 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:57,108 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:56:58,948 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:57:00,708 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:57:02,482 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:57:04,240 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+Traceback (most recent call last):
+  File "D:\vscode\waitress_server.py", line 41, in <module>
+    serve(app, host='0.0.0.0', port=8000, _server_kwargs={'logger': logger})
+  File "D:\vscode\venv\Lib\site-packages\waitress\__init__.py", line 13, in serve
+    server = _server(app, **kw)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\server.py", line 49, in create_server
+    adj = Adjustments(**kw)
+          ^^^^^^^^^^^^^^^^^
+  File "D:\vscode\venv\Lib\site-packages\waitress\adjustments.py", line 324, in __init__
+    raise ValueError("Unknown adjustment %r" % k)
+ValueError: Unknown adjustment '_server_kwargs'
+2025-03-26 11:57:06,037 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+2025-03-26 11:57:06,039 - waitress - INFO - Serving on http://0.0.0.0:8000
+INFO:waitress:Serving on http://0.0.0.0:8000
+2025-03-26 11:57:17,787 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+2025-03-26 11:57:17,790 - waitress - INFO - Serving on http://0.0.0.0:8000
+INFO:waitress:Serving on http://0.0.0.0:8000
+2025-03-26 11:58:36,353 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+2025-03-26 11:58:36,355 - waitress - INFO - Serving on http://0.0.0.0:8000
+INFO:waitress:Serving on http://0.0.0.0:8000
+2025-03-26 12:00:19,311 - waitress - INFO - Waitress server is starting on http://0.0.0.0:8000...
+2025-03-26 12:00:19,314 - waitress - INFO - Serving on http://0.0.0.0:8000
+INFO:waitress:Serving on http://0.0.0.0:8000
