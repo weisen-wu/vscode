@@ -41,7 +41,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return typeof component === "string" ? easycom : component;
   }
-  const apiBaseUrl = "http://10.92.20.102:8000";
+  const apiBaseUrl = "http://10.92.80.85:5000";
   const _imports_0 = "/static/logo.png";
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
@@ -57,29 +57,25 @@ if (uni.restoreGlobal) {
           username: "",
           password: ""
         },
-        pageReady: false
+        pageReady: false,
+        appVersion: "",
+        appName: ""
       };
     },
     onLoad() {
-      formatAppLog("log", "at pages/login/index.vue:32", "登录页面 onLoad 生命周期");
+      formatAppLog("log", "at pages/login/index.vue:37", "登录页面 onLoad 生命周期");
       this.initializePage();
-    },
-    onShow() {
-      formatAppLog("log", "at pages/login/index.vue:36", "登录页面 onShow 生命周期");
-    },
-    onReady() {
-      formatAppLog("log", "at pages/login/index.vue:39", "登录页面 onReady 生命周期");
-      this.pageReady = true;
+      this.getAppVersion();
     },
     methods: {
       initializePage() {
-        formatAppLog("log", "at pages/login/index.vue:44", "初始化登录页面");
+        formatAppLog("log", "at pages/login/index.vue:43", "初始化登录页面");
         try {
           uni.removeStorageSync("auth");
           uni.removeStorageSync("userInfo");
-          formatAppLog("log", "at pages/login/index.vue:49", "清除历史登录信息成功");
+          formatAppLog("log", "at pages/login/index.vue:48", "清除历史登录信息成功");
         } catch (error) {
-          formatAppLog("error", "at pages/login/index.vue:51", "清除历史登录信息失败:", error);
+          formatAppLog("error", "at pages/login/index.vue:50", "清除历史登录信息失败:", error);
         }
       },
       base64Encode(str) {
@@ -103,9 +99,10 @@ if (uni.restoreGlobal) {
         return bytes;
       },
       async handleLogin() {
-        formatAppLog("log", "at pages/login/index.vue:79", "开始登录流程", { username: this.formData.username });
+        var _a;
+        formatAppLog("log", "at pages/login/index.vue:78", "开始登录流程", { username: this.formData.username });
         if (!this.formData.username || !this.formData.password) {
-          formatAppLog("log", "at pages/login/index.vue:81", "表单验证失败：用户名或密码为空");
+          formatAppLog("log", "at pages/login/index.vue:80", "表单验证失败：用户名或密码为空");
           uni.showToast({
             title: "用户名和密码不能为空",
             icon: "none"
@@ -113,9 +110,9 @@ if (uni.restoreGlobal) {
           return;
         }
         try {
-          formatAppLog("log", "at pages/login/index.vue:90", "正在生成认证token...");
+          formatAppLog("log", "at pages/login/index.vue:89", "正在生成认证token...");
           const token = this.base64Encode(`${this.formData.username}:${this.formData.password}`);
-          formatAppLog("log", "at pages/login/index.vue:92", "准备发送登录请求...");
+          formatAppLog("log", "at pages/login/index.vue:91", "准备发送登录请求...");
           const response = await uni.request({
             url: `${apiBaseUrl}/api/login`,
             method: "POST",
@@ -125,28 +122,157 @@ if (uni.restoreGlobal) {
             },
             data: this.formData
           });
-          formatAppLog("log", "at pages/login/index.vue:103", "收到服务器响应:", { statusCode: response.statusCode });
+          formatAppLog("log", "at pages/login/index.vue:102", "收到服务器响应:", { statusCode: response.statusCode });
           if (response.statusCode === 200) {
-            formatAppLog("log", "at pages/login/index.vue:105", "登录成功，保存用户信息...");
+            formatAppLog("log", "at pages/login/index.vue:104", "登录成功，保存用户信息...");
             uni.setStorageSync("auth", token);
             uni.setStorageSync("userInfo", response.data.user);
-            formatAppLog("log", "at pages/login/index.vue:108", "跳转到首页...");
+            try {
+              const versionRes = await uni.request({
+                url: `${apiBaseUrl}/api/check-version`,
+                method: "GET",
+                header: {
+                  "Authorization": `Basic ${token}`
+                }
+              });
+              if (versionRes.statusCode === 200 && versionRes.data && versionRes.data.code === 200 && versionRes.data.data) {
+                const serverVersion = versionRes.data.data.version;
+                const updateLogs = versionRes.data.data.update_logs;
+                const downloadUrl = versionRes.data.data.download_url;
+                formatAppLog("log", "at pages/login/index.vue:122", "服务器版本号:", serverVersion);
+                try {
+                  plus.runtime.getProperty(plus.runtime.appid, async (wgtinfo) => {
+                    const manifestVersion = wgtinfo.version;
+                    formatAppLog("log", "at pages/login/index.vue:128", "获取到的本地版本号:", manifestVersion);
+                    formatAppLog("log", "at pages/login/index.vue:129", "版本比较:", { serverVersion, manifestVersion });
+                    if (serverVersion !== manifestVersion) {
+                      uni.showLoading({
+                        title: "正在更新...",
+                        mask: true
+                      });
+                      uni.showModal({
+                        title: "版本更新",
+                        content: `发现新版本 ${serverVersion}
+
+更新内容：
+${updateLogs[serverVersion]}
+
+系统将自动更新到最新版本`,
+                        showCancel: false,
+                        confirmText: "确定",
+                        success: async () => {
+                          formatAppLog("log", "at pages/login/index.vue:142", "[DEBUG] 开始下载更新:", downloadUrl);
+                          await uni.downloadFile({
+                            url: downloadUrl,
+                            header: {
+                              "Authorization": `Basic ${token}`
+                            },
+                            success: (downloadRes) => {
+                              uni.hideLoading();
+                              formatAppLog("log", "at pages/login/index.vue:150", "[DEBUG] 下载结果:", downloadRes);
+                              if (downloadRes.statusCode === 200) {
+                                const tempFilePath = downloadRes.tempFilePath;
+                                formatAppLog("log", "at pages/login/index.vue:153", "[DEBUG] 临时文件路径:", tempFilePath);
+                                if (!tempFilePath) {
+                                  formatAppLog("error", "at pages/login/index.vue:156", "[ERROR] 临时文件路径为空");
+                                  uni.showModal({
+                                    title: "更新失败",
+                                    content: "下载文件保存失败",
+                                    showCancel: false
+                                  });
+                                  return;
+                                }
+                                plus.runtime.install(tempFilePath, {
+                                  force: true
+                                }, () => {
+                                  formatAppLog("log", "at pages/login/index.vue:168", "[DEBUG] 安装成功");
+                                  uni.showModal({
+                                    title: "更新完成",
+                                    content: "应用已更新完成，请重启应用",
+                                    showCancel: false,
+                                    success: () => {
+                                      plus.runtime.restart();
+                                    }
+                                  });
+                                }, (e2) => {
+                                  formatAppLog("error", "at pages/login/index.vue:178", "[ERROR] 安装更新失败:", e2);
+                                  uni.showModal({
+                                    title: "更新失败",
+                                    content: `安装更新失败：${e2.message}`,
+                                    showCancel: false
+                                  });
+                                });
+                              } else {
+                                formatAppLog("error", "at pages/login/index.vue:186", "[ERROR] 下载失败，状态码:", downloadRes.statusCode);
+                                uni.showModal({
+                                  title: "更新失败",
+                                  content: `下载失败（${downloadRes.statusCode}），请稍后重试`,
+                                  showCancel: false
+                                });
+                              }
+                            },
+                            fail: (err) => {
+                              formatAppLog("error", "at pages/login/index.vue:195", "[ERROR] 下载更新包失败:", err);
+                              uni.showModal({
+                                title: "下载失败",
+                                content: `下载更新包失败：${err.errMsg}`,
+                                showCancel: false
+                              });
+                            }
+                          });
+                        }
+                      });
+                    } else {
+                      formatAppLog("log", "at pages/login/index.vue:206", "当前已是最新版本");
+                    }
+                  });
+                } catch (error) {
+                  formatAppLog("error", "at pages/login/index.vue:210", "获取本地版本号失败:", error);
+                }
+              } else {
+                formatAppLog("error", "at pages/login/index.vue:214", "获取服务器版本信息失败:", versionRes.data);
+                uni.showToast({
+                  title: ((_a = versionRes.data) == null ? void 0 : _a.message) || "获取版本信息失败",
+                  icon: "none"
+                });
+              }
+            } catch (error) {
+              formatAppLog("error", "at pages/login/index.vue:221", "版本检查失败:", error);
+            }
+            formatAppLog("log", "at pages/login/index.vue:224", "跳转到首页...");
             uni.reLaunch({
               url: "/pages/index/index"
             });
           } else {
-            formatAppLog("log", "at pages/login/index.vue:113", "登录失败:", response.data);
+            formatAppLog("log", "at pages/login/index.vue:229", "登录失败:", response.data);
             uni.showToast({
               title: response.data.error || "登录失败",
               icon: "none"
             });
           }
         } catch (error) {
-          formatAppLog("error", "at pages/login/index.vue:120", "登录过程发生错误:", error);
+          formatAppLog("error", "at pages/login/index.vue:236", "登录过程发生错误:", error);
           uni.showToast({
             title: "网络错误",
             icon: "none"
           });
+        }
+      },
+      async getAppVersion() {
+        try {
+          try {
+            plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {
+              formatAppLog("log", "at pages/login/index.vue:249", "获取到的应用信息:", wgtinfo);
+              this.appVersion = wgtinfo.version;
+              this.appName = wgtinfo.name;
+            });
+          } catch (error) {
+            formatAppLog("error", "at pages/login/index.vue:254", "获取APP信息失败:", error);
+          }
+        } catch (error) {
+          formatAppLog("error", "at pages/login/index.vue:264", "获取版本信息失败:", error);
+          this.appVersion = "";
+          this.appName = "";
         }
       }
     }
@@ -195,6 +321,15 @@ if (uni.restoreGlobal) {
           class: "login-btn",
           onClick: _cache[2] || (_cache[2] = (...args) => $options.handleLogin && $options.handleLogin(...args))
         }, "登录")
+      ]),
+      vue.createElementVNode("view", { class: "version-info" }, [
+        vue.createElementVNode(
+          "text",
+          null,
+          vue.toDisplayString($data.appName) + " - 版本号：" + vue.toDisplayString($data.appVersion),
+          1
+          /* TEXT */
+        )
       ])
     ]);
   }

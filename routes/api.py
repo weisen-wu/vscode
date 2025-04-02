@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify, g, current_app
+from flask import Blueprint, request, jsonify, g, current_app, send_file
+import os
 from flask_login import login_required, current_user
 from database import db
 from models.lightstrip import LightStrip
@@ -135,112 +136,73 @@ def extract_operator_name(auth_header):
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 
+@api_bp.route('/check-version', methods=['GET'])
+@api_login_required
 
-'''
-def api_login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # 记录请求信息
-        print('\n[API请求] ->', {
-            '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-            '方法': request.method,
-            'URL': request.url,
-            '参数': {
-                'GET': dict(request.args),
-                'POST': request.get_json(silent=True) or request.form.to_dict(),
-                'Headers': dict(request.headers)
+def check_version():
+    try:
+        current_version = '1.0.0'  # 当前后端版本号
+        update_logs = {
+            '1.0.0': '1. 修复版本检查接口问题\n2. 优化系统稳定性\n3. 改进用户体验'
+        }
+        response = {
+            'code': 200,
+            'message': 'success',
+            'data': {
+                'version': current_version,
+                'update_logs': update_logs,
+                'download_url': f'{request.host_url}api/download/STDT{current_version}.apk'
             }
+        }
+        return jsonify(response)
+    except Exception as e:
+        import traceback
+        error_message = f'获取版本信息失败: {str(e)}'
+        print('[API错误] ->', {
+            '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
+            '状态': 500,
+            '错误': error_message,
+            '异常': str(e),
+            '堆栈': traceback.format_exc()
         })
+        return jsonify({
+            'code': 500,
+            'message': error_message,
+            'data': None
+        }), 500
+            # 在这里添加更多版本的更新日志
 
-        auth_header = request.headers.get('Authorization')
-        if not auth_header:
-            error_response = {'error': '未提供认证信息'}
-            print('[API错误] ->', {
-                '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                '状态': 401,
-                '错误': error_response
-            })
-            return jsonify(error_response), 401
 
-        try:
-            # 解析Basic认证格式
-            if ' ' not in auth_header:
-                error_response = {'error': '认证头格式错误，缺少空格分隔符'}
-                print('[API错误] ->', {
-                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    '状态': 401,
-                    '错误': error_response
-                })
-                return jsonify(error_response), 401
-
-            auth_type, auth_value = auth_header.split(' ', 1)
-            if auth_type.lower() != 'basic':
-                error_response = {'error': '不支持的认证类型'}
-                print('[API错误] ->', {
-                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    '状态': 401,
-                    '错误': error_response
-                })
-                return jsonify(error_response), 401
+@api_bp.route('/download/<filename>', methods=['GET'])
+@api_login_required
+def download_app(filename):
+    try:
+        # 获取下载目录的绝对路径
+        download_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'download'))
+        file_path = os.path.join(download_dir, filename)
+        
+        print('[下载调试] ->', {
+            '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
+            '请求文件': filename,
+            '计算路径': file_path,
+            '文件存在': os.path.exists(file_path)
+        })
+        
+        if not os.path.exists(file_path):
+            return jsonify({'error': '下载文件不存在'}), 404
             
-            try:
-                decoded = base64.b64decode(auth_value).decode('utf-8')
-                username, password = decoded.split(':', 1)
-                print('[认证信息] ->', {
-                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    '用户名': username,
-                    '认证类型': auth_type
-                })
-            except (UnicodeDecodeError, ValueError) as e:
-                error_response = {'error': f'认证信息解码失败: {str(e)}'}
-                print('[API错误] ->', {
-                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    '状态': 401,
-                    '错误': error_response,
-                    '异常': str(e)
-                })
-                return jsonify(error_response), 401
-            
-            user = User.query.filter_by(username=username).first()
-            if user and user.check_password(password):
-                print('[认证成功] ->', {
-                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    '用户': username
-                })
-                return f(*args, **kwargs)
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name=filename
+        )
+    except Exception as e:
+        print('[下载错误] ->', {
+            '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
+            '错误': str(e)
+        })
+        return jsonify({'error': f'下载失败：{str(e)}'}), 500
 
-            error_response = {'error': '认证失败'}
-            print('[API错误] ->', {
-                '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                '状态': 401,
-                '错误': error_response
-            })
-            return jsonify(error_response), 401
-
-        except (ValueError, UnicodeDecodeError, binascii.Error) as e:
-            error_response = {'error': f'无效的认证格式: {str(e)}'}
-            print('[API错误] ->', {
-                '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                '状态': 401,
-                '错误': error_response,
-                '异常': str(e)
-            })
-            return jsonify(error_response), 401
-
-        except Exception as e:
-            import traceback
-            error_response = {'error': '服务器处理认证时发生错误'}
-            print('[API错误] ->', {
-                '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
-                '状态': 500,
-                '错误': error_response,
-                '异常': str(e),
-                '堆栈': traceback.format_exc()
-            })
-            return jsonify(error_response), 500
-
-    return decorated_function
-'''
 @api_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()

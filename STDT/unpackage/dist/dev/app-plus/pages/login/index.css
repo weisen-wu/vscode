@@ -79,3 +79,11 @@
   opacity: 0.9; /* 透明度变化 */
   box-shadow: 0 0.125rem 0.46875rem rgba(41, 121, 255, 0.2); /* 点击时阴影效果 */
 }
+.version-info {
+  position: fixed;
+  bottom: 1.25rem;
+  width: 100%;
+  text-align: center;
+  color: #999;
+  font-size: 0.75rem;
+}
