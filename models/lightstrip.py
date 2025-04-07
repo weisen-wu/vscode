@@ -11,6 +11,7 @@ class LightStrip(db.Model):
     operator_name = db.Column(db.String(80), nullable=False)  # 添加操作者用户名字段
     company_id = db.Column(db.Integer, db.ForeignKey('companies.id'), nullable=False)
     company = db.relationship('Company', backref=db.backref('lightstrips', lazy=True))
+    battery = db.Column(db.Integer, nullable=True)  # 添加电池电量字段
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

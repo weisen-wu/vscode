@@ -126,8 +126,40 @@ def list():
     if not current_user.is_admin:
         flash('权限不足')
         return redirect(url_for('login'))
-    lightstrips = LightStrip.query.all()
-    return render_template('lightstrip/lightstrip_list.html', lightstrips=lightstrips)
+    
+    # 获取分页参数
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+    
+    # 获取搜索参数
+    mac_address = request.args.get('mac_address', '')
+    work_order = request.args.get('work_order', '')
+    battery = request.args.get('battery', '')
+    
+    # 构建查询
+    query = LightStrip.query
+    
+    # 添加搜索条件
+    if mac_address:
+        query = query.filter(LightStrip.mac_address.ilike(f'%{mac_address}%'))
+    if work_order:
+        query = query.filter(LightStrip.work_order.ilike(f'%{work_order}%'))
+    if battery:
+        query = query.filter(LightStrip.battery == int(battery))
+    
+    # 使用分页查询
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    lightstrips = pagination.items
+    
+    # 预先计算分页显示数据
+    start_index = (pagination.page - 1) * pagination.per_page + 1
+    end_index = min(pagination.page * pagination.per_page, pagination.total)
+    
+    return render_template('lightstrip/lightstrip_list.html',
+                         lightstrips=lightstrips,
+                         pagination=pagination,
+                         start_index=start_index,
+                         end_index=end_index)
 
 @lightstrip_bp.route('/create', methods=['GET', 'POST'])
 @login_required

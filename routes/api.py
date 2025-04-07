@@ -383,8 +383,9 @@ def light_lightstrip():
                             'work_order': strip.work_order,
                             'mac_address': strip.mac_address
                         })
-                        # 更新灯条的last_estatione_mac字段
+                        # 更新灯条的last_estatione_mac字段和电池电量
                         strip.last_estatione_mac = estatione.mac_id
+                        strip.battery = item.get('Battery')  # 从MQTT返回结果中获取电池电量
                     else:
                         print(f'[DEBUG] 灯条点亮失败: {strip.work_order}')
                         failed_details.append({
