@@ -41,7 +41,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return typeof component === "string" ? easycom : component;
   }
-  const apiBaseUrl = "http://10.92.80.85:5000";
+  const apiBaseUrl = "http://10.92.20.102:8000";
   const _imports_0 = "/static/logo.png";
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
@@ -57,25 +57,46 @@ if (uni.restoreGlobal) {
           username: "",
           password: ""
         },
+        rememberPassword: false,
         pageReady: false,
         appVersion: "",
         appName: ""
       };
     },
     onLoad() {
-      formatAppLog("log", "at pages/login/index.vue:37", "登录页面 onLoad 生命周期");
+      formatAppLog("log", "at pages/login/index.vue:44", "登录页面 onLoad 生命周期");
       this.initializePage();
       this.getAppVersion();
+      this.loadSavedCredentials();
     },
     methods: {
       initializePage() {
-        formatAppLog("log", "at pages/login/index.vue:43", "初始化登录页面");
+        formatAppLog("log", "at pages/login/index.vue:51", "初始化登录页面");
+        this.pageReady = true;
+      },
+      loadSavedCredentials() {
         try {
-          uni.removeStorageSync("auth");
-          uni.removeStorageSync("userInfo");
-          formatAppLog("log", "at pages/login/index.vue:48", "清除历史登录信息成功");
+          const savedCredentials = uni.getStorageSync("savedCredentials");
+          if (savedCredentials) {
+            const credentials = JSON.parse(savedCredentials);
+            this.formData.username = credentials.username;
+            this.formData.password = credentials.password;
+            this.rememberPassword = true;
+          } else {
+            this.formData.username = "";
+            this.formData.password = "";
+            this.rememberPassword = false;
+          }
         } catch (error) {
-          formatAppLog("error", "at pages/login/index.vue:50", "清除历史登录信息失败:", error);
+          this.formData.username = "";
+          this.formData.password = "";
+          this.rememberPassword = false;
+        }
+      },
+      onRememberPasswordChange(e2) {
+        this.rememberPassword = e2.detail.value.length > 0;
+        if (!this.rememberPassword) {
+          uni.removeStorageSync("savedCredentials");
         }
       },
       base64Encode(str) {
@@ -100,9 +121,9 @@ if (uni.restoreGlobal) {
       },
       async handleLogin() {
         var _a;
-        formatAppLog("log", "at pages/login/index.vue:78", "开始登录流程", { username: this.formData.username });
+        formatAppLog("log", "at pages/login/index.vue:104", "开始登录流程", { username: this.formData.username });
         if (!this.formData.username || !this.formData.password) {
-          formatAppLog("log", "at pages/login/index.vue:80", "表单验证失败：用户名或密码为空");
+          formatAppLog("log", "at pages/login/index.vue:106", "表单验证失败：用户名或密码为空");
           uni.showToast({
             title: "用户名和密码不能为空",
             icon: "none"
@@ -110,9 +131,9 @@ if (uni.restoreGlobal) {
           return;
         }
         try {
-          formatAppLog("log", "at pages/login/index.vue:89", "正在生成认证token...");
+          formatAppLog("log", "at pages/login/index.vue:115", "正在生成认证token...");
           const token = this.base64Encode(`${this.formData.username}:${this.formData.password}`);
-          formatAppLog("log", "at pages/login/index.vue:91", "准备发送登录请求...");
+          formatAppLog("log", "at pages/login/index.vue:117", "准备发送登录请求...");
           const response = await uni.request({
             url: `${apiBaseUrl}/api/login`,
             method: "POST",
@@ -122,11 +143,17 @@ if (uni.restoreGlobal) {
             },
             data: this.formData
           });
-          formatAppLog("log", "at pages/login/index.vue:102", "收到服务器响应:", { statusCode: response.statusCode });
+          formatAppLog("log", "at pages/login/index.vue:128", "收到服务器响应:", { statusCode: response.statusCode });
           if (response.statusCode === 200) {
-            formatAppLog("log", "at pages/login/index.vue:104", "登录成功，保存用户信息...");
+            formatAppLog("log", "at pages/login/index.vue:130", "登录成功，保存用户信息...");
             uni.setStorageSync("auth", token);
             uni.setStorageSync("userInfo", response.data.user);
+            if (this.rememberPassword) {
+              uni.setStorageSync("savedCredentials", JSON.stringify({
+                username: this.formData.username,
+                password: this.formData.password
+              }));
+            }
             try {
               const versionRes = await uni.request({
                 url: `${apiBaseUrl}/api/check-version`,
@@ -139,12 +166,12 @@ if (uni.restoreGlobal) {
                 const serverVersion = versionRes.data.data.version;
                 const updateLogs = versionRes.data.data.update_logs;
                 const downloadUrl = versionRes.data.data.download_url;
-                formatAppLog("log", "at pages/login/index.vue:122", "服务器版本号:", serverVersion);
+                formatAppLog("log", "at pages/login/index.vue:156", "服务器版本号:", serverVersion);
                 try {
                   plus.runtime.getProperty(plus.runtime.appid, async (wgtinfo) => {
                     const manifestVersion = wgtinfo.version;
-                    formatAppLog("log", "at pages/login/index.vue:128", "获取到的本地版本号:", manifestVersion);
-                    formatAppLog("log", "at pages/login/index.vue:129", "版本比较:", { serverVersion, manifestVersion });
+                    formatAppLog("log", "at pages/login/index.vue:162", "获取到的本地版本号:", manifestVersion);
+                    formatAppLog("log", "at pages/login/index.vue:163", "版本比较:", { serverVersion, manifestVersion });
                     if (serverVersion !== manifestVersion) {
                       uni.showLoading({
                         title: "正在更新...",
@@ -161,7 +188,7 @@ ${updateLogs[serverVersion]}
                         showCancel: false,
                         confirmText: "确定",
                         success: async () => {
-                          formatAppLog("log", "at pages/login/index.vue:142", "[DEBUG] 开始下载更新:", downloadUrl);
+                          formatAppLog("log", "at pages/login/index.vue:176", "[DEBUG] 开始下载更新:", downloadUrl);
                           await uni.downloadFile({
                             url: downloadUrl,
                             header: {
@@ -169,12 +196,12 @@ ${updateLogs[serverVersion]}
                             },
                             success: (downloadRes) => {
                               uni.hideLoading();
-                              formatAppLog("log", "at pages/login/index.vue:150", "[DEBUG] 下载结果:", downloadRes);
+                              formatAppLog("log", "at pages/login/index.vue:184", "[DEBUG] 下载结果:", downloadRes);
                               if (downloadRes.statusCode === 200) {
                                 const tempFilePath = downloadRes.tempFilePath;
-                                formatAppLog("log", "at pages/login/index.vue:153", "[DEBUG] 临时文件路径:", tempFilePath);
+                                formatAppLog("log", "at pages/login/index.vue:187", "[DEBUG] 临时文件路径:", tempFilePath);
                                 if (!tempFilePath) {
-                                  formatAppLog("error", "at pages/login/index.vue:156", "[ERROR] 临时文件路径为空");
+                                  formatAppLog("error", "at pages/login/index.vue:190", "[ERROR] 临时文件路径为空");
                                   uni.showModal({
                                     title: "更新失败",
                                     content: "下载文件保存失败",
@@ -185,7 +212,7 @@ ${updateLogs[serverVersion]}
                                 plus.runtime.install(tempFilePath, {
                                   force: true
                                 }, () => {
-                                  formatAppLog("log", "at pages/login/index.vue:168", "[DEBUG] 安装成功");
+                                  formatAppLog("log", "at pages/login/index.vue:202", "[DEBUG] 安装成功");
                                   uni.showModal({
                                     title: "更新完成",
                                     content: "应用已更新完成，请重启应用",
@@ -195,7 +222,7 @@ ${updateLogs[serverVersion]}
                                     }
                                   });
                                 }, (e2) => {
-                                  formatAppLog("error", "at pages/login/index.vue:178", "[ERROR] 安装更新失败:", e2);
+                                  formatAppLog("error", "at pages/login/index.vue:212", "[ERROR] 安装更新失败:", e2);
                                   uni.showModal({
                                     title: "更新失败",
                                     content: `安装更新失败：${e2.message}`,
@@ -203,7 +230,7 @@ ${updateLogs[serverVersion]}
                                   });
                                 });
                               } else {
-                                formatAppLog("error", "at pages/login/index.vue:186", "[ERROR] 下载失败，状态码:", downloadRes.statusCode);
+                                formatAppLog("error", "at pages/login/index.vue:220", "[ERROR] 下载失败，状态码:", downloadRes.statusCode);
                                 uni.showModal({
                                   title: "更新失败",
                                   content: `下载失败（${downloadRes.statusCode}），请稍后重试`,
@@ -212,7 +239,7 @@ ${updateLogs[serverVersion]}
                               }
                             },
                             fail: (err) => {
-                              formatAppLog("error", "at pages/login/index.vue:195", "[ERROR] 下载更新包失败:", err);
+                              formatAppLog("error", "at pages/login/index.vue:229", "[ERROR] 下载更新包失败:", err);
                               uni.showModal({
                                 title: "下载失败",
                                 content: `下载更新包失败：${err.errMsg}`,
@@ -223,35 +250,35 @@ ${updateLogs[serverVersion]}
                         }
                       });
                     } else {
-                      formatAppLog("log", "at pages/login/index.vue:206", "当前已是最新版本");
+                      formatAppLog("log", "at pages/login/index.vue:240", "当前已是最新版本");
                     }
                   });
                 } catch (error) {
-                  formatAppLog("error", "at pages/login/index.vue:210", "获取本地版本号失败:", error);
+                  formatAppLog("error", "at pages/login/index.vue:244", "获取本地版本号失败:", error);
                 }
               } else {
-                formatAppLog("error", "at pages/login/index.vue:214", "获取服务器版本信息失败:", versionRes.data);
+                formatAppLog("error", "at pages/login/index.vue:248", "获取服务器版本信息失败:", versionRes.data);
                 uni.showToast({
                   title: ((_a = versionRes.data) == null ? void 0 : _a.message) || "获取版本信息失败",
                   icon: "none"
                 });
               }
             } catch (error) {
-              formatAppLog("error", "at pages/login/index.vue:221", "版本检查失败:", error);
+              formatAppLog("error", "at pages/login/index.vue:255", "版本检查失败:", error);
             }
-            formatAppLog("log", "at pages/login/index.vue:224", "跳转到首页...");
+            formatAppLog("log", "at pages/login/index.vue:258", "跳转到首页...");
             uni.reLaunch({
               url: "/pages/index/index"
             });
           } else {
-            formatAppLog("log", "at pages/login/index.vue:229", "登录失败:", response.data);
+            formatAppLog("log", "at pages/login/index.vue:263", "登录失败:", response.data);
             uni.showToast({
               title: response.data.error || "登录失败",
               icon: "none"
             });
           }
         } catch (error) {
-          formatAppLog("error", "at pages/login/index.vue:236", "登录过程发生错误:", error);
+          formatAppLog("error", "at pages/login/index.vue:270", "登录过程发生错误:", error);
           uni.showToast({
             title: "网络错误",
             icon: "none"
@@ -262,15 +289,15 @@ ${updateLogs[serverVersion]}
         try {
           try {
             plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {
-              formatAppLog("log", "at pages/login/index.vue:249", "获取到的应用信息:", wgtinfo);
+              formatAppLog("log", "at pages/login/index.vue:283", "获取到的应用信息:", wgtinfo);
               this.appVersion = wgtinfo.version;
               this.appName = wgtinfo.name;
             });
           } catch (error) {
-            formatAppLog("error", "at pages/login/index.vue:254", "获取APP信息失败:", error);
+            formatAppLog("error", "at pages/login/index.vue:288", "获取APP信息失败:", error);
           }
         } catch (error) {
-          formatAppLog("error", "at pages/login/index.vue:264", "获取版本信息失败:", error);
+          formatAppLog("error", "at pages/login/index.vue:298", "获取版本信息失败:", error);
           this.appVersion = "";
           this.appName = "";
         }
@@ -317,9 +344,27 @@ ${updateLogs[serverVersion]}
             [vue.vModelText, $data.formData.password]
           ])
         ]),
+        vue.createElementVNode("view", { class: "remember-password" }, [
+          vue.createElementVNode(
+            "checkbox-group",
+            {
+              onChange: _cache[2] || (_cache[2] = (...args) => $options.onRememberPasswordChange && $options.onRememberPasswordChange(...args))
+            },
+            [
+              vue.createElementVNode("checkbox", {
+                checked: $data.rememberPassword,
+                value: "1",
+                style: { "transform": "scale(0.8)" }
+              }, null, 8, ["checked"])
+            ],
+            32
+            /* NEED_HYDRATION */
+          ),
+          vue.createElementVNode("text", null, "记住密码")
+        ]),
         vue.createElementVNode("button", {
           class: "login-btn",
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.handleLogin && $options.handleLogin(...args))
+          onClick: _cache[3] || (_cache[3] = (...args) => $options.handleLogin && $options.handleLogin(...args))
         }, "登录")
       ]),
       vue.createElementVNode("view", { class: "version-info" }, [
@@ -7248,37 +7293,114 @@ ${i3}
     ]);
   }
   const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-c2f1266a"], ["__file", "D:/vscode/STDT/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const MAX_WORK_ORDER_LENGTH = 16;
+  const MAX_MAC_LENGTH = 12;
   const _sfc_main$6 = {
-    data() {
-      return {
-        formData: {
-          mac_address: "",
-          work_order: ""
+    __name: "bind",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const formRef = vue.ref(null);
+      const workOrderFocus = vue.ref(false);
+      const macFocus = vue.ref(false);
+      const formData = vue.ref({
+        mac_address: "",
+        work_order: ""
+      });
+      const userTitles = vue.ref("");
+      const todayRecords = vue.ref([]);
+      const lastWorkOrderLength = vue.ref(0);
+      const lastMacLength = vue.ref(0);
+      const handleWorkOrderInput = (e2) => {
+        const value = e2.detail.value;
+        if (value.length === MAX_WORK_ORDER_LENGTH && lastWorkOrderLength.value < MAX_WORK_ORDER_LENGTH) {
+          uni.showToast({
+            title: "工单号已达到最大长度" + MAX_WORK_ORDER_LENGTH + "位",
+            icon: "none",
+            duration: 1500
+          });
+        }
+        lastWorkOrderLength.value = value.length;
+        formData.value.work_order = value;
+      };
+      const handleMacInput = (e2) => {
+        const value = e2.detail.value;
+        if (value.length === MAX_MAC_LENGTH && lastMacLength.value < MAX_MAC_LENGTH) {
+          uni.showToast({
+            title: "灯条码已达到最大长度" + MAX_MAC_LENGTH + "位",
+            icon: "none",
+            duration: 1500
+          });
+        }
+        lastMacLength.value = value.length;
+        formData.value.mac_address = value;
+      };
+      const rules = {
+        mac_address: {
+          rules: [{
+            required: true,
+            errorMessage: "请输入灯条码"
+          }, {
+            validateFunction: (rule, value, data, callback) => {
+              if (value.length > MAX_MAC_LENGTH) {
+                callback("灯条码不能超过" + MAX_MAC_LENGTH + "位");
+              }
+              return true;
+            }
+          }]
         },
-        userTitles: "",
-        todayRecords: [],
-        rules: {
-          mac_address: {
-            rules: [{
-              required: true,
-              errorMessage: "请输入灯条码"
-            }]
-          },
-          work_order: {
-            rules: [{
-              required: true,
-              errorMessage: "请输入绑定号"
-            }]
-          }
+        work_order: {
+          rules: [{
+            required: true,
+            errorMessage: "请输入绑定号"
+          }, {
+            validateFunction: (rule, value, data, callback) => {
+              if (value.length > MAX_WORK_ORDER_LENGTH) {
+                callback("工单号不能超过" + MAX_WORK_ORDER_LENGTH + "位");
+              }
+              return true;
+            }
+          }]
         }
       };
-    },
-    mounted() {
-      this.fetchUserInfo();
-      this.fetchTodayRecords();
-    },
-    methods: {
-      async fetchUserInfo() {
+      vue.onMounted(() => {
+        setTimeout(() => {
+          workOrderFocus.value = true;
+        }, 300);
+        fetchUserInfo();
+        fetchTodayRecords();
+      });
+      vue.watch(() => formData.value.work_order, (newVal, oldVal) => {
+        if (newVal && newVal !== oldVal) {
+          if (newVal.length > ((oldVal == null ? void 0 : oldVal.length) || 0)) {
+            if (newVal.length >= MAX_WORK_ORDER_LENGTH) {
+              uni.showToast({
+                title: "工单号已达到最大长度" + MAX_WORK_ORDER_LENGTH + "位",
+                icon: "none",
+                duration: 1500
+              });
+            }
+            setTimeout(() => {
+              workOrderFocus.value = false;
+              macFocus.value = true;
+            }, 100);
+          }
+        }
+      });
+      vue.watch(() => formData.value.mac_address, (newVal, oldVal) => {
+        if (newVal && newVal !== oldVal) {
+          if (newVal.length >= MAX_MAC_LENGTH) {
+            uni.showToast({
+              title: "灯条码已达到最大长度" + MAX_MAC_LENGTH + "位",
+              icon: "none",
+              duration: 1500
+            });
+          }
+        }
+      });
+      const handleWorkOrderBlur = () => {
+        workOrderFocus.value = false;
+      };
+      const fetchUserInfo = async () => {
         try {
           const response = await uni.request({
             url: `${apiBaseUrl}/api/user/info`,
@@ -7288,13 +7410,13 @@ ${i3}
             }
           });
           if (response.statusCode === 200) {
-            this.userTitles = response.data.titles;
+            userTitles.value = response.data.titles;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/index/bind.vue:75", "获取用户信息失败:", error);
+          formatAppLog("error", "at pages/index/bind.vue:190", "获取用户信息失败:", error);
         }
-      },
-      async fetchTodayRecords() {
+      };
+      const fetchTodayRecords = async () => {
         try {
           const response = await uni.request({
             url: `${apiBaseUrl}/api/lightstrip/today-records`,
@@ -7304,7 +7426,7 @@ ${i3}
             }
           });
           if (response.statusCode === 200) {
-            this.todayRecords = response.data;
+            todayRecords.value = response.data;
           }
         } catch (error) {
           uni.showToast({
@@ -7312,14 +7434,14 @@ ${i3}
             icon: "none"
           });
         }
-      },
-      async handleSubmit() {
+      };
+      const handleSubmit = async () => {
         try {
-          const valid = await this.$refs.form.validate();
+          const valid = await formRef.value.validate();
           if (!valid)
             return;
-          if (!this.formData.mac_address.toUpperCase().startsWith("AD1")) {
-            this.formData.mac_address = "AD1" + this.formData.mac_address;
+          if (!formData.value.mac_address.toUpperCase().startsWith("AD1")) {
+            formData.value.mac_address = "AD1" + formData.value.mac_address;
           }
           const response = await uni.request({
             url: `${apiBaseUrl}/api/lightstrip/bind`,
@@ -7328,7 +7450,7 @@ ${i3}
               "Authorization": "Basic " + uni.getStorageSync("auth"),
               "Content-Type": "application/json"
             },
-            data: this.formData
+            data: formData.value
           });
           if (response.statusCode === 200) {
             uni.showToast({
@@ -7336,9 +7458,13 @@ ${i3}
               icon: "success",
               duration: 2e3
             });
-            this.formData.mac_address = "";
-            this.formData.work_order = "";
-            this.fetchTodayRecords();
+            formData.value.mac_address = "";
+            formData.value.work_order = "";
+            fetchTodayRecords();
+            macFocus.value = false;
+            setTimeout(() => {
+              workOrderFocus.value = true;
+            }, 100);
           } else {
             uni.showToast({
               title: response.data.error || "操作失败",
@@ -7351,11 +7477,15 @@ ${i3}
             icon: "none"
           });
         }
-      }
+      };
+      const __returned__ = { formRef, workOrderFocus, macFocus, formData, userTitles, todayRecords, MAX_WORK_ORDER_LENGTH, MAX_MAC_LENGTH, lastWorkOrderLength, lastMacLength, handleWorkOrderInput, handleMacInput, rules, handleWorkOrderBlur, fetchUserInfo, fetchTodayRecords, handleSubmit, ref: vue.ref, onMounted: vue.onMounted, watch: vue.watch, get apiBaseUrl() {
+        return apiBaseUrl;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
     }
   };
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2$1);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1);
@@ -7363,47 +7493,58 @@ ${i3}
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "form-container" }, [
         vue.createVNode(_component_uni_forms, {
-          ref: "form",
-          rules: $data.rules,
-          modelValue: $data.formData
+          ref: "formRef",
+          rules: $setup.rules,
+          modelValue: $setup.formData
         }, {
           default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_forms_item, {
+              label: $setup.userTitles || "工单号",
+              name: "work_order"
+            }, {
+              default: vue.withCtx(() => [
+                vue.withDirectives(vue.createElementVNode("input", {
+                  class: "uni-input",
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.formData.work_order = $event),
+                  placeholder: "请输入" + ($setup.userTitles || "工单号"),
+                  focus: $setup.workOrderFocus,
+                  onBlur: $setup.handleWorkOrderBlur,
+                  maxlength: $setup.MAX_WORK_ORDER_LENGTH,
+                  onInput: $setup.handleWorkOrderInput
+                }, null, 40, ["placeholder", "focus"]), [
+                  [vue.vModelText, $setup.formData.work_order]
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["label"]),
             vue.createVNode(_component_uni_forms_item, {
               label: "灯条码",
               name: "mac_address"
             }, {
               default: vue.withCtx(() => [
-                vue.createVNode(_component_uni_easyinput, {
-                  modelValue: $data.formData.mac_address,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formData.mac_address = $event),
-                  placeholder: "请输入灯条码"
-                }, null, 8, ["modelValue"])
+                vue.withDirectives(vue.createElementVNode("input", {
+                  class: "uni-input",
+                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.formData.mac_address = $event),
+                  focus: $setup.macFocus,
+                  placeholder: "请输入灯条码",
+                  maxlength: $setup.MAX_MAC_LENGTH,
+                  onInput: $setup.handleMacInput
+                }, null, 40, ["focus"]), [
+                  [vue.vModelText, $setup.formData.mac_address]
+                ])
               ]),
               _: 1
               /* STABLE */
-            }),
-            vue.createVNode(_component_uni_forms_item, {
-              label: $data.userTitles || "工单号",
-              name: "work_order"
-            }, {
-              default: vue.withCtx(() => [
-                vue.createVNode(_component_uni_easyinput, {
-                  modelValue: $data.formData.work_order,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.formData.work_order = $event),
-                  placeholder: "请输入" + ($data.userTitles || "工单号")
-                }, null, 8, ["modelValue", "placeholder"])
-              ]),
-              _: 1
-              /* STABLE */
-            }, 8, ["label"])
+            })
           ]),
           _: 1
           /* STABLE */
-        }, 8, ["rules", "modelValue"]),
+        }, 8, ["modelValue"]),
         vue.createElementVNode("button", {
           class: "submit-btn",
           type: "primary",
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.handleSubmit && $options.handleSubmit(...args))
+          onClick: $setup.handleSubmit
         }, "提交")
       ]),
       vue.createElementVNode("view", { class: "records-container" }, [
@@ -7417,7 +7558,7 @@ ${i3}
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList($data.todayRecords, (record) => {
+                vue.renderList($setup.todayRecords, (record) => {
                   return vue.openBlock(), vue.createBlock(_component_uni_list_item, {
                     key: record.id,
                     title: "灯条码: " + record.mac_address,
@@ -7436,30 +7577,54 @@ ${i3}
     ]);
   }
   const PagesIndexBind = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "D:/vscode/STDT/pages/index/bind.vue"]]);
+  const MAX_INPUT_LENGTH$1 = 20;
   const _sfc_main$5 = {
-    data() {
-      return {
-        formData: {
-          identifier: ""
-        },
-        userTitles: "",
-        todayRecords: [],
-        rules: {
-          identifier: {
-            rules: [{
-              required: true,
-              errorMessage: "请输入灯条码或工单号"
-            }]
-          }
+    __name: "unbind",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const form = vue.ref(null);
+      const inputFocus = vue.ref(false);
+      const lastInputLength = vue.ref(0);
+      const formData = vue.ref({
+        identifier: ""
+      });
+      const userTitles = vue.ref("");
+      const todayRecords = vue.ref([]);
+      const rules = {
+        identifier: {
+          rules: [{
+            required: true,
+            errorMessage: "请输入灯条码或工单号"
+          }, {
+            validateFunction: (rule, value, data, callback) => {
+              if (value.length > MAX_INPUT_LENGTH$1) {
+                callback("输入长度不能超过" + MAX_INPUT_LENGTH$1 + "位");
+              }
+              return true;
+            }
+          }]
         }
       };
-    },
-    mounted() {
-      this.fetchUserInfo();
-      this.fetchTodayRecords();
-    },
-    methods: {
-      async fetchUserInfo() {
+      const handleInput = (e2) => {
+        const value = e2.detail.value;
+        if (value.length === MAX_INPUT_LENGTH$1 && lastInputLength.value < MAX_INPUT_LENGTH$1) {
+          uni.showToast({
+            title: "输入已达到最大长度" + MAX_INPUT_LENGTH$1 + "位",
+            icon: "none",
+            duration: 1500
+          });
+        }
+        lastInputLength.value = value.length;
+        formData.value.identifier = value;
+      };
+      vue.onMounted(() => {
+        setTimeout(() => {
+          inputFocus.value = true;
+        }, 300);
+        fetchUserInfo();
+        fetchTodayRecords();
+      });
+      const fetchUserInfo = async () => {
         try {
           const response = await uni.request({
             url: `${apiBaseUrl}/api/user/info`,
@@ -7469,13 +7634,13 @@ ${i3}
             }
           });
           if (response.statusCode === 200) {
-            this.userTitles = response.data.titles;
+            userTitles.value = response.data.titles;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/index/unbind.vue:65", "获取用户信息失败:", error);
+          formatAppLog("error", "at pages/index/unbind.vue:103", "获取用户信息失败:", error);
         }
-      },
-      async fetchTodayRecords() {
+      };
+      const fetchTodayRecords = async () => {
         try {
           const response = await uni.request({
             url: `${apiBaseUrl}/api/lightstrip/today-unbind-records`,
@@ -7485,7 +7650,7 @@ ${i3}
             }
           });
           if (response.statusCode === 200) {
-            this.todayRecords = response.data;
+            todayRecords.value = response.data;
           }
         } catch (error) {
           uni.showToast({
@@ -7493,10 +7658,10 @@ ${i3}
             icon: "none"
           });
         }
-      },
-      async handleSubmit() {
+      };
+      const handleSubmit = async () => {
         try {
-          const valid = await this.$refs.form.validate();
+          const valid = await form.value.validate();
           if (!valid)
             return;
           const response = await uni.request({
@@ -7506,7 +7671,7 @@ ${i3}
               "Authorization": "Basic " + uni.getStorageSync("auth"),
               "Content-Type": "application/json"
             },
-            data: this.formData
+            data: formData.value
           });
           if (response.statusCode === 200) {
             uni.showToast({
@@ -7514,7 +7679,12 @@ ${i3}
               icon: "success",
               duration: 2e3
             });
-            this.formData.identifier = "";
+            formData.value.identifier = "";
+            fetchTodayRecords();
+            lastInputLength.value = 0;
+            setTimeout(() => {
+              inputFocus.value = true;
+            }, 100);
           } else {
             uni.showToast({
               title: response.data.error || "操作失败",
@@ -7527,11 +7697,15 @@ ${i3}
             icon: "none"
           });
         }
-      }
+      };
+      const __returned__ = { form, inputFocus, MAX_INPUT_LENGTH: MAX_INPUT_LENGTH$1, lastInputLength, formData, userTitles, todayRecords, rules, handleInput, fetchUserInfo, fetchTodayRecords, handleSubmit, ref: vue.ref, onMounted: vue.onMounted, get apiBaseUrl() {
+        return apiBaseUrl;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
     }
   };
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2$1);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1);
@@ -7540,20 +7714,25 @@ ${i3}
       vue.createElementVNode("view", { class: "form-container" }, [
         vue.createVNode(_component_uni_forms, {
           ref: "form",
-          rules: $data.rules,
-          modelValue: $data.formData
+          rules: $setup.rules,
+          modelValue: $setup.formData
         }, {
           default: vue.withCtx(() => [
             vue.createVNode(_component_uni_forms_item, {
-              label: "灯条码或" + ($data.userTitles || "工单号"),
+              label: "灯条码或" + ($setup.userTitles || "工单号"),
               name: "identifier"
             }, {
               default: vue.withCtx(() => [
-                vue.createVNode(_component_uni_easyinput, {
-                  modelValue: $data.formData.identifier,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formData.identifier = $event),
-                  placeholder: "请输入灯条码或" + ($data.userTitles || "工单号")
-                }, null, 8, ["modelValue", "placeholder"])
+                vue.withDirectives(vue.createElementVNode("input", {
+                  class: "uni-input",
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.formData.identifier = $event),
+                  placeholder: "请输入灯条码或" + ($setup.userTitles || "工单号"),
+                  focus: $setup.inputFocus,
+                  maxlength: $setup.MAX_INPUT_LENGTH,
+                  onInput: $setup.handleInput
+                }, null, 40, ["placeholder", "focus"]), [
+                  [vue.vModelText, $setup.formData.identifier]
+                ])
               ]),
               _: 1
               /* STABLE */
@@ -7561,14 +7740,14 @@ ${i3}
           ]),
           _: 1
           /* STABLE */
-        }, 8, ["rules", "modelValue"]),
+        }, 8, ["modelValue"]),
         vue.createElementVNode("button", {
           class: "submit-btn",
           type: "primary",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.handleSubmit && $options.handleSubmit(...args))
+          onClick: $setup.handleSubmit
         }, "解绑灯条")
       ]),
-      $data.todayRecords.length > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+      $setup.todayRecords.length > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
         class: "records-container"
       }, [
@@ -7582,7 +7761,7 @@ ${i3}
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList($data.todayRecords, (record) => {
+                vue.renderList($setup.todayRecords, (record) => {
                   return vue.openBlock(), vue.createBlock(_component_uni_list_item, {
                     key: record.id,
                     title: "灯条码: " + record.mac_address,
@@ -8364,28 +8543,52 @@ ${i3}
     ]);
   }
   const PagesIndexLightstripList = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/vscode/STDT/pages/index/lightstrip_list.vue"]]);
+  const MAX_INPUT_LENGTH = 16;
   const _sfc_main$2 = {
-    data() {
-      return {
-        formData: {
-          work_order: ""
-        },
-        userTitles: "",
-        rules: {
-          work_order: {
-            rules: [{
-              required: true,
-              errorMessage: "请输入工单号"
-            }]
-          }
+    __name: "light",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const form = vue.ref(null);
+      const inputFocus = vue.ref(false);
+      const lastInputLength = vue.ref(0);
+      const formData = vue.ref({
+        work_order: ""
+      });
+      const userTitles = vue.ref("");
+      const rules = {
+        work_order: {
+          rules: [{
+            required: true,
+            errorMessage: "请输入工单号"
+          }, {
+            validateFunction: (rule, value, data, callback) => {
+              if (value.length > MAX_INPUT_LENGTH) {
+                callback("工单号不能超过" + MAX_INPUT_LENGTH + "位");
+              }
+              return true;
+            }
+          }]
         }
       };
-    },
-    mounted() {
-      this.fetchUserInfo();
-    },
-    methods: {
-      async fetchUserInfo() {
+      const handleInput = (e2) => {
+        const value = e2.detail.value;
+        if (value.length === MAX_INPUT_LENGTH && lastInputLength.value < MAX_INPUT_LENGTH) {
+          uni.showToast({
+            title: "工单号已达到最大长度" + MAX_INPUT_LENGTH + "位",
+            icon: "none",
+            duration: 1500
+          });
+        }
+        lastInputLength.value = value.length;
+        formData.value.work_order = value;
+      };
+      vue.onMounted(() => {
+        setTimeout(() => {
+          inputFocus.value = true;
+        }, 300);
+        fetchUserInfo();
+      });
+      const fetchUserInfo = async () => {
         try {
           const response = await uni.request({
             url: `${apiBaseUrl}/api/user/info`,
@@ -8395,16 +8598,16 @@ ${i3}
             }
           });
           if (response.statusCode === 200) {
-            this.userTitles = response.data.titles;
+            userTitles.value = response.data.titles;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/index/light.vue:52", "获取用户信息失败:", error);
+          formatAppLog("error", "at pages/index/light.vue:90", "获取用户信息失败:", error);
         }
-      },
-      async handleSubmit() {
+      };
+      const handleSubmit = async () => {
         var _a, _b;
         try {
-          const valid = await this.$refs.form.validate();
+          const valid = await form.value.validate();
           if (!valid)
             return;
           const response = await uni.request({
@@ -8413,33 +8616,34 @@ ${i3}
             header: {
               "Authorization": "Basic " + uni.getStorageSync("auth")
             },
-            data: this.formData
+            data: formData.value
           });
           if (response.statusCode === 200) {
             const result = response.data;
             if (result.data && result.data.success_details && result.data.success_details.length > 0) {
-              uni.showModal({
-                title: "操作成功",
-                content: "灯条已成功点亮",
-                showCancel: false,
-                success: function() {
-                  uni.redirectTo({
-                    url: "/pages/index/light"
-                  });
-                }
+              uni.showToast({
+                title: "点亮成功",
+                icon: "success",
+                duration: 2e3
               });
+              formData.value.work_order = "";
+              lastInputLength.value = 0;
+              inputFocus.value = false;
+              setTimeout(() => {
+                inputFocus.value = true;
+              }, 300);
             } else {
-              uni.showModal({
-                title: "操作失败",
-                content: ((_b = (_a = result.data.failed_details) == null ? void 0 : _a[0]) == null ? void 0 : _b.error) || "点亮灯条失败",
-                showCancel: false
+              uni.showToast({
+                title: ((_b = (_a = result.data.failed_details) == null ? void 0 : _a[0]) == null ? void 0 : _b.error) || "点亮失败",
+                icon: "none",
+                duration: 2e3
               });
             }
           } else {
-            uni.showModal({
-              title: "操作失败",
-              content: response.data.error || "点亮灯条失败",
-              showCancel: false
+            uni.showToast({
+              title: response.data.error || "点亮失败",
+              icon: "none",
+              duration: 2e3
             });
           }
         } catch (error) {
@@ -8448,31 +8652,40 @@ ${i3}
             icon: "none"
           });
         }
-      }
+      };
+      const __returned__ = { form, inputFocus, MAX_INPUT_LENGTH, lastInputLength, formData, userTitles, rules, handleInput, fetchUserInfo, handleSubmit, ref: vue.ref, onMounted: vue.onMounted, get apiBaseUrl() {
+        return apiBaseUrl;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "form-container" }, [
         vue.createVNode(_component_uni_forms, {
           ref: "form",
-          rules: $data.rules,
-          modelValue: $data.formData
+          rules: $setup.rules,
+          modelValue: $setup.formData
         }, {
           default: vue.withCtx(() => [
             vue.createVNode(_component_uni_forms_item, {
-              label: $data.userTitles || "工单号",
+              label: $setup.userTitles || "工单号",
               name: "work_order"
             }, {
               default: vue.withCtx(() => [
-                vue.createVNode(_component_uni_easyinput, {
-                  modelValue: $data.formData.work_order,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formData.work_order = $event),
-                  placeholder: "请输入" + ($data.userTitles || "工单号")
-                }, null, 8, ["modelValue", "placeholder"])
+                vue.withDirectives(vue.createElementVNode("input", {
+                  class: "uni-input",
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.formData.work_order = $event),
+                  placeholder: "请输入" + ($setup.userTitles || "工单号"),
+                  focus: $setup.inputFocus,
+                  maxlength: $setup.MAX_INPUT_LENGTH,
+                  onInput: $setup.handleInput
+                }, null, 40, ["placeholder", "focus"]), [
+                  [vue.vModelText, $setup.formData.work_order]
+                ])
               ]),
               _: 1
               /* STABLE */
@@ -8480,11 +8693,11 @@ ${i3}
           ]),
           _: 1
           /* STABLE */
-        }, 8, ["rules", "modelValue"]),
+        }, 8, ["modelValue"]),
         vue.createElementVNode("button", {
           class: "submit-btn",
           type: "primary",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.handleSubmit && $options.handleSubmit(...args))
+          onClick: $setup.handleSubmit
         }, "点亮灯条")
       ])
     ]);
@@ -8657,6 +8870,7 @@ ${i3}
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2$1);
+    const _directive_focus = vue.resolveDirective("focus");
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "search-container" }, [
         vue.createVNode(_component_uni_forms, {
@@ -8665,17 +8879,18 @@ ${i3}
           modelValue: $data.formData
         }, {
           default: vue.withCtx(() => [
-            vue.createVNode(_component_uni_forms_item, {
-              label: "领料单号",
-              name: "po_order"
-            }, {
+            vue.createVNode(_component_uni_forms_item, { name: "po_order" }, {
               default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "label-row" }, "领料单号"),
                 vue.createElementVNode("view", { class: "search-box" }, [
-                  vue.createVNode(_component_uni_easyinput, {
+                  vue.withDirectives(vue.createVNode(_component_uni_easyinput, {
                     modelValue: $data.formData.po_order,
                     "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formData.po_order = $event),
-                    placeholder: "请输入领料单号"
-                  }, null, 8, ["modelValue"]),
+                    placeholder: "请输入领料单号",
+                    class: "wide-input"
+                  }, null, 8, ["modelValue"]), [
+                    [_directive_focus]
+                  ]),
                   vue.createElementVNode("button", {
                     class: "search-btn",
                     type: "primary",
@@ -8793,8 +9008,24 @@ ${i3}
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/vscode/STDT/App.vue"]]);
+  const focus = {
+    mounted: (el) => {
+      vue.nextTick(() => {
+        setTimeout(() => {
+          var _a;
+          const instance = (_a = el.__vueParentComponent) == null ? void 0 : _a.proxy;
+          if (instance && typeof instance.onFocus === "function") {
+            instance.onFocus();
+          } else if (el.tagName === "INPUT") {
+            el.focus();
+          }
+        }, 100);
+      });
+    }
+  };
   function createApp() {
     const app = vue.createVueApp(App);
+    app.directive("focus", focus);
     return {
       app
     };

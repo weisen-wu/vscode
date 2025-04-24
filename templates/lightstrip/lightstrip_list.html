@@ -231,18 +231,21 @@
     <table class="table table-striped table-hover">
         <thead class="table-light">
             <tr>
+                <th>ID</th>
                 <th>MAC地址</th>
                 <th>工单号</th>
                 <th>最后一次基站MAC</th>
                 <th>操作者</th>
                 <th>所属公司</th>
                 <th>电池电量</th>
+                <th>创建日期</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
             {% for lightstrip in lightstrips %}
             <tr>
+                <td>{{ lightstrip.id }}</td>
                 <td>{{ lightstrip.mac_address }}</td>
                 <td>{{ lightstrip.work_order }}</td>
                 <td>{{ lightstrip.last_estatione_mac }}</td>
@@ -265,6 +268,7 @@
                         <span class="badge bg-secondary">未知</span>
                     {% endif %}
                 </td>
+                <td>{{ lightstrip.created_at.strftime('%Y-%m-%d') }}</td>
                 <td>
                     <a href="{{ url_for('lightstrip.edit', id=lightstrip.id) }}" class="btn btn-sm btn-primary me-2">
                         <i class="bi bi-pencil"></i> 编辑

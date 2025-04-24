@@ -146,6 +146,9 @@ def list():
         query = query.filter(LightStrip.work_order.ilike(f'%{work_order}%'))
     if battery:
         query = query.filter(LightStrip.battery == int(battery))
+        
+    # 按创建时间降序排序
+    query = query.order_by(LightStrip.created_at.desc())
     
     # 使用分页查询
     pagination = query.paginate(page=page, per_page=per_page, error_out=False)

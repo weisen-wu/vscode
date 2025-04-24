@@ -1,12 +1,27 @@
 <template>
   <view class="container">
     <view class="form-container">
-      <uni-forms ref="form" :rules="rules" :modelValue="formData">
-        <uni-forms-item label="灯条码" name="mac_address">
-          <uni-easyinput v-model="formData.mac_address" placeholder="请输入灯条码"></uni-easyinput>
-        </uni-forms-item>
+      <uni-forms ref="formRef" :rules="rules" :modelValue="formData">
         <uni-forms-item :label="userTitles || '工单号'" name="work_order">
-          <uni-easyinput v-model="formData.work_order" :placeholder="'请输入' + (userTitles || '工单号')"></uni-easyinput>
+          <input 
+            class="uni-input"
+            v-model="formData.work_order" 
+            :placeholder="'请输入' + (userTitles || '工单号')"
+            :focus="workOrderFocus"
+            @blur="handleWorkOrderBlur"
+            :maxlength="MAX_WORK_ORDER_LENGTH"
+            @input="handleWorkOrderInput"
+          />
+        </uni-forms-item>
+        <uni-forms-item label="灯条码" name="mac_address">
+          <input 
+            class="uni-input"
+            v-model="formData.mac_address" 
+            :focus="macFocus"
+            placeholder="请输入灯条码"
+            :maxlength="MAX_MAC_LENGTH"
+            @input="handleMacInput"
+          />
         </uni-forms-item>
       </uni-forms>
       <button class="submit-btn" type="primary" @click="handleSubmit">提交</button>
@@ -18,125 +33,233 @@
           <uni-list-item v-for="record in todayRecords" :key="record.id"
             :title="'灯条码: ' + record.mac_address"
             :note="'绑定号: ' + record.work_order"
-          </uni-list-item>
+          ></uni-list-item>
         </uni-list>
       </scroll-view>
     </view>
   </view>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, watch } from 'vue'
 import { apiBaseUrl } from '/config.js'
 
-export default {
-  data() {
-    return {
-      formData: {
-        mac_address: '',
-        work_order: ''
+const formRef = ref(null)
+const workOrderFocus = ref(false)
+const macFocus = ref(false)
+
+const formData = ref({
+  mac_address: '',
+  work_order: ''
+})
+
+const userTitles = ref('')
+const todayRecords = ref([])
+
+// 输入长度限制
+const MAX_WORK_ORDER_LENGTH = 16
+const MAX_MAC_LENGTH = 12
+
+// 上一次输入的长度
+const lastWorkOrderLength = ref(0)
+const lastMacLength = ref(0)
+
+// 处理工单号输入
+const handleWorkOrderInput = (e) => {
+  const value = e.detail.value
+  // 如果当前输入长度等于最大长度，且上一次输入长度小于最大长度，说明刚刚达到限制
+  if (value.length === MAX_WORK_ORDER_LENGTH && lastWorkOrderLength.value < MAX_WORK_ORDER_LENGTH) {
+    uni.showToast({
+      title: '工单号已达到最大长度' + MAX_WORK_ORDER_LENGTH + '位',
+      icon: 'none',
+      duration: 1500
+    })
+  }
+  lastWorkOrderLength.value = value.length
+  formData.value.work_order = value
+}
+
+// 处理灯条码输入
+const handleMacInput = (e) => {
+  const value = e.detail.value
+  // 如果当前输入长度等于最大长度，且上一次输入长度小于最大长度，说明刚刚达到限制
+  if (value.length === MAX_MAC_LENGTH && lastMacLength.value < MAX_MAC_LENGTH) {
+    uni.showToast({
+      title: '灯条码已达到最大长度' + MAX_MAC_LENGTH + '位',
+      icon: 'none',
+      duration: 1500
+    })
+  }
+  lastMacLength.value = value.length
+  formData.value.mac_address = value
+}
+
+const rules = {
+  mac_address: {
+    rules: [{
+      required: true,
+      errorMessage: '请输入灯条码'
+    }, {
+      validateFunction: (rule, value, data, callback) => {
+        if (value.length > MAX_MAC_LENGTH) {
+          callback('灯条码不能超过' + MAX_MAC_LENGTH + '位')
+        }
+        return true
+      }
+    }]
+  },
+  work_order: {
+    rules: [{
+      required: true,
+      errorMessage: '请输入绑定号'
+    }, {
+      validateFunction: (rule, value, data, callback) => {
+        if (value.length > MAX_WORK_ORDER_LENGTH) {
+          callback('工单号不能超过' + MAX_WORK_ORDER_LENGTH + '位')
+        }
+        return true
+      }
+    }]
+  }
+}
+
+onMounted(() => {
+  // 页面加载后延迟聚焦到工单号输入框
+  setTimeout(() => {
+    workOrderFocus.value = true
+  }, 300)
+  
+  fetchUserInfo()
+  fetchTodayRecords()
+})
+
+// 监听工单号变化
+watch(() => formData.value.work_order, (newVal, oldVal) => {
+  if (newVal && newVal !== oldVal) {
+    // 如果新值的长度大于旧值的长度，说明是新输入或扫码输入
+    if (newVal.length > (oldVal?.length || 0)) {
+      // 如果输入超过最大长度，显示提示
+      if (newVal.length >= MAX_WORK_ORDER_LENGTH) {
+        uni.showToast({
+          title: '工单号已达到最大长度' + MAX_WORK_ORDER_LENGTH + '位',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+      setTimeout(() => {
+        workOrderFocus.value = false
+        macFocus.value = true
+      }, 100)
+    }
+  }
+})
+
+// 监听灯条码变化
+watch(() => formData.value.mac_address, (newVal, oldVal) => {
+  if (newVal && newVal !== oldVal) {
+    // 如果新值的长度大于旧值的长度，说明是新输入或扫码输入
+    if (newVal.length >= MAX_MAC_LENGTH) {
+      uni.showToast({
+        title: '灯条码已达到最大长度' + MAX_MAC_LENGTH + '位',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+  }
+})
+
+// 处理工单号失焦事件
+const handleWorkOrderBlur = () => {
+  workOrderFocus.value = false
+}
+
+const fetchUserInfo = async () => {
+  try {
+    const response = await uni.request({
+      url: `${apiBaseUrl}/api/user/info`,
+      method: 'GET',
+      header: {
+        'Authorization': 'Basic ' + uni.getStorageSync('auth')
+      }
+    })
+
+    if (response.statusCode === 200) {
+      userTitles.value = response.data.titles
+    }
+  } catch (error) {
+    console.error('获取用户信息失败:', error)
+  }
+}
+
+const fetchTodayRecords = async () => {
+  try {
+    const response = await uni.request({
+      url: `${apiBaseUrl}/api/lightstrip/today-records`,
+      method: 'GET',
+      header: {
+        'Authorization': 'Basic ' + uni.getStorageSync('auth')
+      }
+    })
+
+    if (response.statusCode === 200) {
+      todayRecords.value = response.data
+    }
+  } catch (error) {
+    uni.showToast({
+      title: '获取记录失败',
+      icon: 'none'
+    })
+  }
+}
+
+const handleSubmit = async () => {
+  try {
+    const valid = await formRef.value.validate()
+    if (!valid) return
+
+    // 检查MAC地址是否以'AD1'开头，如果不是则添加前缀
+    if (!formData.value.mac_address.toUpperCase().startsWith('AD1')) {
+      formData.value.mac_address = 'AD1' + formData.value.mac_address
+    }
+
+    const response = await uni.request({
+      url: `${apiBaseUrl}/api/lightstrip/bind`,
+      method: 'POST',
+      header: {
+        'Authorization': 'Basic ' + uni.getStorageSync('auth'),
+        'Content-Type': 'application/json'
       },
-      userTitles: '',
-      todayRecords: [],
-      rules: {
-        mac_address: {
-          rules: [{
-            required: true,
-            errorMessage: '请输入灯条码'
-          }]
-        },
-        work_order: {
-          rules: [{
-            required: true,
-            errorMessage: '请输入绑定号'
-          }]
-        }
-      }
+      data: formData.value
+    })
+
+    if (response.statusCode === 200) {
+      uni.showToast({
+        title: '绑定成功',
+        icon: 'success',
+        duration: 2000
+      })
+      // 清空表单数据
+      formData.value.mac_address = ''
+      formData.value.work_order = ''
+      fetchTodayRecords()
+      
+      // 重置焦点状态
+      macFocus.value = false
+      // 延迟设置工单号输入框焦点，确保在表单清空后再聚焦
+      setTimeout(() => {
+        workOrderFocus.value = true
+      }, 100)
+    } else {
+      uni.showToast({
+        title: response.data.error || '操作失败',
+        icon: 'none'
+      })
     }
-  },
-  mounted() {
-    this.fetchUserInfo()
-    this.fetchTodayRecords()
-  },
-  methods: {
-    async fetchUserInfo() {
-      try {
-        const response = await uni.request({
-          url: `${apiBaseUrl}/api/user/info`,
-          method: 'GET',
-          header: {
-            'Authorization': 'Basic ' + uni.getStorageSync('auth')
-          }
-        })
-
-        if (response.statusCode === 200) {
-          this.userTitles = response.data.titles
-        }
-      } catch (error) {
-        console.error('获取用户信息失败:', error)
-      }
-    },
-    async fetchTodayRecords() {
-      try {
-        const response = await uni.request({
-          url: `${apiBaseUrl}/api/lightstrip/today-records`,
-          method: 'GET',
-          header: {
-            'Authorization': 'Basic ' + uni.getStorageSync('auth')
-          }
-        })
-
-        if (response.statusCode === 200) {
-          this.todayRecords = response.data
-        }
-      } catch (error) {
-        uni.showToast({
-          title: '获取记录失败',
-          icon: 'none'
-        })
-      }
-    },
-    async handleSubmit() {
-      try {
-        const valid = await this.$refs.form.validate()
-        if (!valid) return
-
-        // 检查MAC地址是否以'AD1'开头，如果不是则添加前缀
-        if (!this.formData.mac_address.toUpperCase().startsWith('AD1')) {
-          this.formData.mac_address = 'AD1' + this.formData.mac_address
-        }
-
-        const response = await uni.request({
-          url: `${apiBaseUrl}/api/lightstrip/bind`,
-          method: 'POST',
-          header: {
-            'Authorization': 'Basic ' + uni.getStorageSync('auth'),
-            'Content-Type': 'application/json'
-          },
-          data: this.formData
-        })
-
-        if (response.statusCode === 200) {
-          uni.showToast({
-            title: '绑定成功',
-            icon: 'success',
-            duration: 2000
-          })
-          this.formData.mac_address = ''
-          this.formData.work_order = ''
-          this.fetchTodayRecords()
-        } else {
-          uni.showToast({
-            title: response.data.error || '操作失败',
-            icon: 'none'
-          })
-        }
-      } catch (error) {
-        uni.showToast({
-          title: '网络错误，请重试',
-          icon: 'none'
-        })
-      }
-    }
+  } catch (error) {
+    uni.showToast({
+      title: '网络错误，请重试',
+      icon: 'none'
+    })
   }
 }
 </script>
@@ -176,5 +299,14 @@ export default {
 
 .records-list {
   max-height: 600rpx;
+}
+
+.uni-input {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>

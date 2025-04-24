@@ -16,8 +16,11 @@ app.$mount()
 // #ifdef VUE3
 import { createSSRApp } from 'vue'
 import App from './App.vue'
+import { focus } from './directives/focus'
+
 export function createApp() {
   const app = createSSRApp(App)
+  app.directive('focus', focus)
   return {
     app
   }

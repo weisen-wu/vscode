@@ -141,9 +141,9 @@ api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 def check_version():
     try:
-        current_version = '1.0.0'  # 当前后端版本号
+        current_version = '1.0.4'  # 当前后端版本号
         update_logs = {
-            '1.0.0': '1. 修复版本检查接口问题\n2. 优化系统稳定性\n3. 改进用户体验'
+            '1.0.4': '1.1.调整自动输入焦点，限制了绑定长度'
         }
         response = {
             'code': 200,
@@ -480,13 +480,13 @@ def search_po():
         
         # 连接MSSQL数据库
         try:
-            conn = pyodbc.connect('DRIVER={SQL Server};SERVER=10.92.20.180,1433;DATABASE=SUNTOP;UID=SUNTOP;PWD=SUNTOP123')
+            conn = pyodbc.connect('DRIVER={SQL Server};SERVER=10.92.20.180,1433;DATABASE=YUN;UID=SUNTOP;PWD=SUNTOP123')
             cursor = conn.cursor()
         except pyodbc.Error as e:
             return jsonify({'error': f'数据库连接失败：{str(e)}'}), 500
         
         # 查询视图
-        query = "SELECT work_order, work_ph, work_sl FROM [SUNTOP].[dbo].[领料明细测试用] WHERE po_order = ? AND work_order IS NOT NULL AND work_order != ''"
+        query = "SELECT work_order, work_ph, work_sl FROM [YUN].[dbo].[五金二齐套领料明细] WHERE po_order = ? AND work_order IS NOT NULL AND work_order != ''"
         cursor.execute(query, (po_order,))
         
         # 获取结果

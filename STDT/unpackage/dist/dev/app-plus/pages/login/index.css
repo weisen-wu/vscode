@@ -58,6 +58,19 @@
   outline: none;
 }
 
+/* 记住密码样式 */
+.remember-password {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.625rem;
+  padding: 0 0.9375rem;
+}
+.remember-password uni-text {
+  margin-left: 0.3125rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
 /* 登录按钮样式 */
 .login-btn {
   width: 80%;

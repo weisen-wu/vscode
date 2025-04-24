@@ -10,6 +10,12 @@
       <view class="form-item">
         <input type="password" v-model="formData.password" placeholder="请输入密码" />
       </view>
+      <view class="remember-password">
+        <checkbox-group @change="onRememberPasswordChange">
+          <checkbox :checked="rememberPassword" value="1" style="transform:scale(0.8)" />
+        </checkbox-group>
+        <text>记住密码</text>
+      </view>
       <button class="login-btn" @click="handleLogin">登录</button>
     </view>
     <view class="version-info">
@@ -28,6 +34,7 @@ export default {
         username: '',
         password: ''
       },
+      rememberPassword: false,
       pageReady: false,
       appVersion: '',
       appName: ''
@@ -37,17 +44,36 @@ export default {
     console.log('登录页面 onLoad 生命周期')
     this.initializePage()
     this.getAppVersion()
+    this.loadSavedCredentials()
   },
   methods: {
     initializePage() {
       console.log('初始化登录页面')
-      // 清除之前的登录状态
+      this.pageReady = true
+    },
+    loadSavedCredentials() {
       try {
-        uni.removeStorageSync('auth')
-        uni.removeStorageSync('userInfo')
-        console.log('清除历史登录信息成功')
+        const savedCredentials = uni.getStorageSync('savedCredentials')
+        if (savedCredentials) {
+          const credentials = JSON.parse(savedCredentials)
+          this.formData.username = credentials.username
+          this.formData.password = credentials.password
+          this.rememberPassword = true
+        } else {
+          this.formData.username = ''
+          this.formData.password = ''
+          this.rememberPassword = false
+        }
       } catch (error) {
-        console.error('清除历史登录信息失败:', error)
+        this.formData.username = ''
+        this.formData.password = ''
+        this.rememberPassword = false
+      }
+    },
+    onRememberPasswordChange(e) {
+      this.rememberPassword = e.detail.value.length > 0
+      if (!this.rememberPassword) {
+        uni.removeStorageSync('savedCredentials')
       }
     },
     base64Encode(str) {
@@ -104,6 +130,14 @@ export default {
           console.log('登录成功，保存用户信息...')
           uni.setStorageSync('auth', token)
           uni.setStorageSync('userInfo', response.data.user)
+          
+          // 如果选择记住密码，保存凭证
+          if (this.rememberPassword) {
+            uni.setStorageSync('savedCredentials', JSON.stringify({
+              username: this.formData.username,
+              password: this.formData.password
+            }))
+          }
           
           // 检查版本
           try {
@@ -333,6 +367,20 @@ export default {
   border-color: #2979ff;
   box-shadow: 0 0 0 2rpx rgba(41, 121, 255, 0.2); /* 焦点状态阴影效果 */
   outline: none;
+}
+
+/* 记住密码样式 */
+.remember-password {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+}
+
+.remember-password text {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: #666;
 }
 
 /* 登录按钮样式 */

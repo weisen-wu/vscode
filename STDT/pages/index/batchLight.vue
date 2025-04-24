@@ -2,9 +2,10 @@
   <view class="container">
     <view class="search-container">
       <uni-forms ref="form" :rules="rules" :modelValue="formData">
-        <uni-forms-item label="领料单号" name="po_order">
+        <uni-forms-item name="po_order">
+          <view class="label-row">领料单号</view>
           <view class="search-box">
-            <uni-easyinput v-model="formData.po_order" placeholder="请输入领料单号"></uni-easyinput>
+            <uni-easyinput v-model="formData.po_order" placeholder="请输入领料单号" class="wide-input" v-focus></uni-easyinput>
             <button class="search-btn" type="primary" @click="handleSearch">查询</button>
           </view>
         </uni-forms-item>
@@ -57,6 +58,7 @@ export default {
       isProcessing: false
     }
   },
+
   methods: {
     async handleSearch() {
       try {
@@ -242,7 +244,16 @@ export default {
   align-items: center;
   gap: 20rpx;
 }
-
+.label-row {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+.wide-input {
+  flex: 1;
+  min-width: 400rpx;
+  max-width: 100%;
+}
 .search-btn {
   width: 160rpx;
   height: 70rpx;
