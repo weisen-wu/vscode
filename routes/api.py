@@ -141,9 +141,9 @@ api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 def check_version():
     try:
-        current_version = '1.0.4'  # 当前后端版本号
+        current_version = '1.0.8'  # 当前后端版本号
         update_logs = {
-            '1.0.4': '1.1.调整自动输入焦点，限制了绑定长度'
+            '1.0.8': '1.1.优化工单和灯条码输入框，验证，防止出错'
         }
         response = {
             'code': 200,
@@ -269,7 +269,8 @@ def bind_lightstrip():
             mac_address=mac_address,
             work_order=work_order,
             operator_name=operator_name,
-            company_id=current_user.company_id
+            company_id=current_user.company_id,
+            last_estatione_mac=current_user.ap_mac  # 设置用户默认基站为灯条的初始基站
         )
         db.session.add(strip)
         
@@ -330,9 +331,26 @@ def light_lightstrip():
         return jsonify({'error': '未找到对应的灯条或无权限访问'}), 404
     
     # 获取公司的基站列表
-    estationes = EStatione.query.filter_by(company_id=current_user.company_id).all()
-    if not estationes:
+    all_estationes = EStatione.query.filter_by(company_id=current_user.company_id).all()
+    if not all_estationes:
         return jsonify({'error': '未找到可用的基站'}), 404
+    
+    # 按照默认基站对灯条进行分组
+    strips_by_estatione = {}
+    for strip in strips:
+        if strip.last_estatione_mac:
+            if strip.last_estatione_mac not in strips_by_estatione:
+                strips_by_estatione[strip.last_estatione_mac] = []
+            strips_by_estatione[strip.last_estatione_mac].append(strip)
+    
+    # 未分配默认基站的灯条放入单独的列表
+    unassigned_strips = [strip for strip in strips if not strip.last_estatione_mac]
+    
+    # 获取基站MAC ID到基站对象的映射
+    estatione_map = {estatione.mac_id: estatione for estatione in all_estationes}
+    
+    # 对于每个基站分组，尝试发送MQTT任务
+    remaining_strips = []  # 存储需要重试的灯条
     
     # 获取用户配置的颜色和时长
     color_map = {
@@ -368,14 +386,14 @@ def light_lightstrip():
             print(f'[DEBUG] 解析后的数据: {result_data}')
             
             # 验证消息来源的基站ID是否匹配
-            if result_data.get('ID') != estatione.mac_id:
-                print(f'[DEBUG] 基站ID不匹配: 期望={estatione.mac_id}, 实际={result_data.get("ID")}')
+            if result_data.get('ID') != current_estatione.mac_id:
+                print(f'[DEBUG] 基站ID不匹配: 期望={current_estatione.mac_id}, 实际={result_data.get("ID")}')
                 return
             
             # 处理每个灯条的结果
             for item in result_data.get('Results', []):
                 print(f'[DEBUG] 处理结果项: {item}')
-                strip = next((s for s in strips if s.mac_address == item.get('TagID')), None)
+                strip = next((s for s in current_strips if s.mac_address == item.get('TagID')), None)
                 if strip:
                     if item.get('ResultType') == 254:
                         print(f'[DEBUG] 灯条点亮成功: {strip.work_order}')
@@ -384,7 +402,7 @@ def light_lightstrip():
                             'mac_address': strip.mac_address
                         })
                         # 更新灯条的last_estatione_mac字段和电池电量
-                        strip.last_estatione_mac = estatione.mac_id
+                        strip.last_estatione_mac = current_estatione.mac_id
                         strip.battery = item.get('Battery')  # 从MQTT返回结果中获取电池电量
                     else:
                         print(f'[DEBUG] 灯条点亮失败: {strip.work_order}')
@@ -393,6 +411,7 @@ def light_lightstrip():
                             'mac_address': strip.mac_address,
                             'error': f'ResultType={item.get("ResultType")}'
                         })
+                        remaining_strips.append(strip)  # 添加到需要重试的列表中
         except Exception as e:
             print(f'[ERROR] MQTT消息处理错误: {str(e)}')
             current_app.logger.error(f'MQTT消息处理错误: {str(e)}')
@@ -404,44 +423,101 @@ def light_lightstrip():
         mqtt_client.connect('10.92.20.102', 1883, 60)
         mqtt_client.loop_start()
         
-        # 尝试每个基站
-        for estatione in estationes:
-            # 构造任务数据
-            # 获取用户配置的颜色和时长
-            user_color = current_user.colors or 'red'  # 默认为红色
-            user_time = current_user.time or 1  # 默认为1秒
-            
-            # 获取对应的RGB配置
-            rgb_config = color_map.get(user_color, color_map['red'])
-            
-            task_items = [{
-                'TagID': strip.mac_address,
-                'Beep': True,
-                'Flashing': True,
-                'Colors': [rgb_config]
-            } for strip in strips]
-            
-            task_data = {
-                'Time': user_time,
-                'Items': task_items
-            }
-            
-            # 设置主题
-            task_topic = f'/estation/{estatione.mac_id}/task'
-            result_topic = f'/estation/{estatione.mac_id}/result'
-            
-            # 订阅结果主题
-            mqtt_client.subscribe(result_topic)
-            
-            # 发送任务
-            mqtt_client.publish(task_topic, json.dumps(task_data))
-            
-            # 等待5秒检查结果
-            time.sleep(5)
-            
-            # 如果所有灯条都有结果，就不需要继续尝试其他基站
-            if len(success_details) + len(failed_details) == len(strips):
-                break
+        # 获取用户配置的颜色和时长
+        user_color = current_user.colors or 'red'  # 默认为红色
+        user_time = current_user.time or 1  # 默认为1秒
+        rgb_config = color_map.get(user_color, color_map['red'])
+        
+        # 首先处理已分配默认基站的灯条
+        for estatione_mac, strips_group in strips_by_estatione.items():
+            if estatione_mac in estatione_map:
+                current_estatione = estatione_map[estatione_mac]
+                current_strips = strips_group
+                
+                # 构造任务数据
+                task_items = [{
+                    'TagID': strip.mac_address,
+                    'Beep': True,
+                    'Flashing': True,
+                    'Colors': [rgb_config]
+                } for strip in current_strips]
+                
+                task_data = {
+                    'Time': user_time,
+                    'Items': task_items
+                }
+                
+                # 设置主题
+                task_topic = f'/estation/{current_estatione.mac_id}/task'
+                result_topic = f'/estation/{current_estatione.mac_id}/result'
+                
+                # 订阅结果主题
+                mqtt_client.subscribe(result_topic)
+                
+                # 打印任务数据
+                print('[MQTT任务] ->', {
+                    '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    '基站': current_estatione.mac_id,
+                    '任务主题': task_topic,
+                    '任务数据': json.dumps(task_data, indent=2, ensure_ascii=False)
+                })
+                
+                # 发送任务
+                mqtt_client.publish(task_topic, json.dumps(task_data))
+                
+                # 等待10秒检查结果
+                time.sleep(10)
+            else:
+                # 如果默认基站不存在，将灯条添加到需要重试的列表中
+                remaining_strips.extend(strips_group)
+        
+        # 将未分配基站的灯条添加到需要重试的列表中
+        remaining_strips.extend(unassigned_strips)
+        
+        # 对剩余的灯条尝试其他基站
+        if remaining_strips:
+            for estatione in all_estationes:
+                if remaining_strips:  # 如果还有未成功的灯条
+                    current_estatione = estatione
+                    current_strips = remaining_strips[:]
+                    
+                    # 构造任务数据
+                    task_items = [{
+                        'TagID': strip.mac_address,
+                        'Beep': True,
+                        'Flashing': True,
+                        'Colors': [rgb_config]
+                    } for strip in current_strips]
+                    
+                    task_data = {
+                        'Time': user_time,
+                        'Items': task_items
+                    }
+                    
+                    # 设置主题
+                    task_topic = f'/estation/{current_estatione.mac_id}/task'
+                    result_topic = f'/estation/{current_estatione.mac_id}/result'
+                    
+                    # 订阅结果主题
+                    mqtt_client.subscribe(result_topic)
+                    
+                    # 打印任务数据
+                    print('[MQTT任务] ->', {
+                        '时间': time.strftime('%Y-%m-%d %H:%M:%S'),
+                        '基站': current_estatione.mac_id,
+                        '任务主题': task_topic,
+                        '任务数据': json.dumps(task_data, indent=2, ensure_ascii=False)
+                    })
+                    
+                    # 发送任务
+                    mqtt_client.publish(task_topic, json.dumps(task_data))
+                    
+                    # 等待10秒检查结果
+                    time.sleep(10)
+                    
+                    # 更新remaining_strips列表，移除已成功的灯条
+                    remaining_strips = [strip for strip in remaining_strips if strip.mac_address not in 
+                                      [detail['mac_address'] for detail in success_details]]
         
         mqtt_client.loop_stop()
         mqtt_client.disconnect()

@@ -14,6 +14,7 @@ class User(db.Model):
     colors = db.Column(db.String(20), nullable=True)
     time = db.Column(db.Integer, nullable=True)
     titles = db.Column(db.String(200), nullable=True)
+    ap_mac = db.Column(db.String(50), nullable=True)
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

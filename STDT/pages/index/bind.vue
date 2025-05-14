@@ -67,25 +67,58 @@ const lastMacLength = ref(0)
 // 处理工单号输入
 const handleWorkOrderInput = (e) => {
   const value = e.detail.value
-  // 如果当前输入长度等于最大长度，且上一次输入长度小于最大长度，说明刚刚达到限制
-  if (value.length === MAX_WORK_ORDER_LENGTH && lastWorkOrderLength.value < MAX_WORK_ORDER_LENGTH) {
-    uni.showToast({
-      title: '工单号已达到最大长度' + MAX_WORK_ORDER_LENGTH + '位',
-      icon: 'none',
-      duration: 1500
-    })
-  }
-  lastWorkOrderLength.value = value.length
   formData.value.work_order = value
+  
+  // 使用延时等待扫码数据完整录入，增加延时时间以确保扫码数据完整
+  setTimeout(() => {
+    // 增加延时时间到800毫秒，确保扫码数据完整录入后再验证格式
+    // 检查是否包含'-'符号
+    if (!formData.value.work_order.includes('-')) {
+      uni.showToast({
+        title: '工单号格式错误，必须包含"-"符号',
+        icon: 'none',
+        duration: 2000
+      })
+      // 清空输入内容和formData中的值
+      formData.value.work_order = ''
+      // 保持焦点在工单号输入框
+      workOrderFocus.value = true
+      return
+    }
+    // 检查长度限制
+    if (formData.value.work_order.length > MAX_WORK_ORDER_LENGTH) {
+      uni.showToast({
+        title: '工单号不能超过' + MAX_WORK_ORDER_LENGTH + '位',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    lastWorkOrderLength.value = formData.value.work_order.length
+    // 当输入正确的工单号格式时，自动切换到灯条码输入框
+    workOrderFocus.value = false
+    macFocus.value = true
+  }, 800) // 增加延时等待时间，确保扫码数据完整录入
 }
 
 // 处理灯条码输入
 const handleMacInput = (e) => {
   const value = e.detail.value
-  // 如果当前输入长度等于最大长度，且上一次输入长度小于最大长度，说明刚刚达到限制
-  if (value.length === MAX_MAC_LENGTH && lastMacLength.value < MAX_MAC_LENGTH) {
+  // 检查是否包含工单号特有的'-'符号
+  if (value.includes('-')) {
     uni.showToast({
-      title: '灯条码已达到最大长度' + MAX_MAC_LENGTH + '位',
+      title: '检测到工单号格式，请在正确的输入框中输入',
+      icon: 'none',
+      duration: 3000
+    })
+    // 清空输入内容和formData中的值
+    e.detail.value = ''
+    formData.value.mac_address = ''
+    return
+  }
+  // 只在超出最大长度时显示提示
+  if (value.length > MAX_MAC_LENGTH) {
+    uni.showToast({
+      title: '灯条码不能超过' + MAX_MAC_LENGTH + '位',
       icon: 'none',
       duration: 1500
     })
@@ -126,6 +159,7 @@ const rules = {
 onMounted(() => {
   // 页面加载后延迟聚焦到工单号输入框
   setTimeout(() => {
+    // 增加延时时间到800毫秒，确保扫码数据完整录入后再验证格式
     workOrderFocus.value = true
   }, 300)
   
@@ -138,18 +172,14 @@ watch(() => formData.value.work_order, (newVal, oldVal) => {
   if (newVal && newVal !== oldVal) {
     // 如果新值的长度大于旧值的长度，说明是新输入或扫码输入
     if (newVal.length > (oldVal?.length || 0)) {
-      // 如果输入超过最大长度，显示提示
-      if (newVal.length >= MAX_WORK_ORDER_LENGTH) {
+      // 只在超出最大长度时显示提示
+      if (newVal.length > MAX_WORK_ORDER_LENGTH) {
         uni.showToast({
-          title: '工单号已达到最大长度' + MAX_WORK_ORDER_LENGTH + '位',
+          title: '工单号不能超过' + MAX_WORK_ORDER_LENGTH + '位',
           icon: 'none',
           duration: 1500
         })
       }
-      setTimeout(() => {
-        workOrderFocus.value = false
-        macFocus.value = true
-      }, 100)
     }
   }
 })
@@ -158,9 +188,9 @@ watch(() => formData.value.work_order, (newVal, oldVal) => {
 watch(() => formData.value.mac_address, (newVal, oldVal) => {
   if (newVal && newVal !== oldVal) {
     // 如果新值的长度大于旧值的长度，说明是新输入或扫码输入
-    if (newVal.length >= MAX_MAC_LENGTH) {
+    if (newVal.length > MAX_MAC_LENGTH) {
       uni.showToast({
-        title: '灯条码已达到最大长度' + MAX_MAC_LENGTH + '位',
+        title: '灯条码不能超过' + MAX_MAC_LENGTH + '位',
         icon: 'none',
         duration: 1500
       })
@@ -222,6 +252,16 @@ const handleSubmit = async () => {
       formData.value.mac_address = 'AD1' + formData.value.mac_address
     }
 
+    // 验证灯条码不能仅包含'AD1'前缀
+    if (formData.value.mac_address.toUpperCase() === 'AD1') {
+      uni.showToast({
+        title: '请输入完整的灯条码',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+
     const response = await uni.request({
       url: `${apiBaseUrl}/api/lightstrip/bind`,
       method: 'POST',
@@ -247,6 +287,7 @@ const handleSubmit = async () => {
       macFocus.value = false
       // 延迟设置工单号输入框焦点，确保在表单清空后再聚焦
       setTimeout(() => {
+    // 增加延时时间到800毫秒，确保扫码数据完整录入后再验证格式
         workOrderFocus.value = true
       }, 100)
     } else {

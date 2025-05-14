@@ -174,7 +174,6 @@
         }
     }
 </style>
-</style>
 {% endblock %}
 
 {% block content %}
@@ -305,7 +304,7 @@
         <ul class="pagination mb-0">
             {% if pagination.has_prev %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('lightstrip.list', page=pagination.prev_num, per_page=request.args.get('per_page', 10)) }}" aria-label="Previous">
+                <a class="page-link" href="{{ url_for('lightstrip.list', page=pagination.prev_num, per_page=request.args.get('per_page', 10), mac_address=request.args.get('mac_address', ''), work_order=request.args.get('work_order', ''), battery=request.args.get('battery', '')) }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -318,7 +317,7 @@
             {% for page in pagination.iter_pages() %}
                 {% if page %}
                     <li class="page-item {% if page == pagination.page %}active{% endif %}">
-                        <a class="page-link" href="{{ url_for('lightstrip.list', page=page, per_page=request.args.get('per_page', 10)) }}">{{ page }}</a>
+                        <a class="page-link" href="{{ url_for('lightstrip.list', page=page, per_page=request.args.get('per_page', 10), mac_address=request.args.get('mac_address', ''), work_order=request.args.get('work_order', ''), battery=request.args.get('battery', '')) }}">{{ page }}</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -329,7 +328,7 @@
             
             {% if pagination.has_next %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('lightstrip.list', page=pagination.next_num, per_page=request.args.get('per_page', 10)) }}" aria-label="Next">
+                <a class="page-link" href="{{ url_for('lightstrip.list', page=pagination.next_num, per_page=request.args.get('per_page', 10), mac_address=request.args.get('mac_address', ''), work_order=request.args.get('work_order', ''), battery=request.args.get('battery', '')) }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -342,135 +341,20 @@
     </span>
 </div>
 
-<script>
-function changePerPage(value) {
-    window.location.href = "{{ url_for('lightstrip.list') }}?per_page=" + value;
-}
-</script>
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <script>
+function changePerPage(value) {
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('per_page', value);
+    window.location.href = currentUrl.toString();
+}
+
 function deleteLightstrip(id) {
     if (confirm('确定要删除这个灯条吗？')) {
         window.location.href = "{{ url_for('lightstrip.delete', id=0) }}".replace('0', id);
     }
-}
-
-// 生成Excel模板内容
-function generateExcelTemplate() {
-    const headers = ["MAC地址", "工单号", "所属公司"];
-    const example = ["AA:BB:CC:DD:EE:FF", "WO12345", "示例公司名称"];
-    
-    const ws = XLSX.utils.aoa_to_sheet([headers, example]);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "灯条导入");
-    
-    // 设置列宽
-    const wscols = [
-        {wch: 20}, // MAC地址列宽
-        {wch: 15}, // 工单号列宽
-        {wch: 20}  // 所属公司列宽
-    ];
-    ws['!cols'] = wscols;
-    
-    return wb;
-}
-
-// 下载模板
-document.getElementById('downloadTemplate').addEventListener('click', function(e) {
-    e.preventDefault();
-    const wb = generateExcelTemplate();
-    XLSX.writeFile(wb, '灯条导入模板.xlsx');
-});
-
-// 处理导入表单提交
-function handleImport(event) {
-    event.preventDefault();
-    const fileInput = document.getElementById('importFile');
-    if (!fileInput.files.length) {
-        alert('请选择要导入的Excel文件');
-        return false;
-    }
-    
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        const fileData = new Uint8Array(e.target.result);
-        processExcel(fileData);
-    };
-    
-    reader.readAsArrayBuffer(file);
-    return false;
-}
-
-// 处理Excel数据
-function processExcel(fileData) {
-    const workbook = XLSX.read(fileData, {type: 'array'});
-    const firstSheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[firstSheetName];
-    const jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-    
-    if (jsonData.length < 2) { // 至少需要标题行和一行数据
-        alert('Excel文件为空或格式不正确');
-        return;
-    }
-    
-    const headers = jsonData[0];
-    
-    // 验证Excel格式
-    if (headers.length < 3 || 
-        !headers.includes('MAC地址') || 
-        !headers.includes('工单号') || 
-        !headers.includes('所属公司')) {
-        alert('Excel格式不正确，请使用提供的模板');
-        return;
-    }
-    
-    // 解析数据
-    const importData = [];
-    for (let i = 1; i < jsonData.length; i++) {
-        const row = jsonData[i];
-        if (row.length === 0) continue;
-        
-        const item = {};
-        for (let j = 0; j < headers.length; j++) {
-            item[headers[j]] = row[j] || '';
-        }
-        importData.push(item);
-    }
-    
-    if (importData.length === 0) {
-        alert('没有找到有效数据');
-        return;
-    }
-    
-    // 发送数据到服务器
-    fetch('{{ url_for("lightstrip.import_csv") }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ data: importData })
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.status === 'success') {
-            const message = `导入完成：
-成功导入 ${result.imported_count || 0} 条数据
-${result.duplicate_count ? '跳过 ' + result.duplicate_count + ' 条重复数据' : ''}
-${result.invalid_count ? '失败 ' + result.invalid_count + ' 条无效数据' : ''}`;
-            alert(message);
-            window.location.reload();
-        } else {
-            alert('导入失败：' + result.message);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('导入过程中发生错误');
-    });
 }
 </script>
 {% endblock %}

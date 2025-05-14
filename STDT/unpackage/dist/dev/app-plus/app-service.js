@@ -7312,21 +7312,45 @@ ${i3}
       const lastMacLength = vue.ref(0);
       const handleWorkOrderInput = (e2) => {
         const value = e2.detail.value;
-        if (value.length === MAX_WORK_ORDER_LENGTH && lastWorkOrderLength.value < MAX_WORK_ORDER_LENGTH) {
-          uni.showToast({
-            title: "工单号已达到最大长度" + MAX_WORK_ORDER_LENGTH + "位",
-            icon: "none",
-            duration: 1500
-          });
-        }
-        lastWorkOrderLength.value = value.length;
         formData.value.work_order = value;
+        setTimeout(() => {
+          if (!formData.value.work_order.includes("-")) {
+            uni.showToast({
+              title: '工单号格式错误，必须包含"-"符号',
+              icon: "none",
+              duration: 2e3
+            });
+            formData.value.work_order = "";
+            workOrderFocus.value = true;
+            return;
+          }
+          if (formData.value.work_order.length > MAX_WORK_ORDER_LENGTH) {
+            uni.showToast({
+              title: "工单号不能超过" + MAX_WORK_ORDER_LENGTH + "位",
+              icon: "none",
+              duration: 1500
+            });
+          }
+          lastWorkOrderLength.value = formData.value.work_order.length;
+          workOrderFocus.value = false;
+          macFocus.value = true;
+        }, 800);
       };
       const handleMacInput = (e2) => {
         const value = e2.detail.value;
-        if (value.length === MAX_MAC_LENGTH && lastMacLength.value < MAX_MAC_LENGTH) {
+        if (value.includes("-")) {
           uni.showToast({
-            title: "灯条码已达到最大长度" + MAX_MAC_LENGTH + "位",
+            title: "检测到工单号格式，请在正确的输入框中输入",
+            icon: "none",
+            duration: 3e3
+          });
+          e2.detail.value = "";
+          formData.value.mac_address = "";
+          return;
+        }
+        if (value.length > MAX_MAC_LENGTH) {
+          uni.showToast({
+            title: "灯条码不能超过" + MAX_MAC_LENGTH + "位",
             icon: "none",
             duration: 1500
           });
@@ -7372,25 +7396,21 @@ ${i3}
       vue.watch(() => formData.value.work_order, (newVal, oldVal) => {
         if (newVal && newVal !== oldVal) {
           if (newVal.length > ((oldVal == null ? void 0 : oldVal.length) || 0)) {
-            if (newVal.length >= MAX_WORK_ORDER_LENGTH) {
+            if (newVal.length > MAX_WORK_ORDER_LENGTH) {
               uni.showToast({
-                title: "工单号已达到最大长度" + MAX_WORK_ORDER_LENGTH + "位",
+                title: "工单号不能超过" + MAX_WORK_ORDER_LENGTH + "位",
                 icon: "none",
                 duration: 1500
               });
             }
-            setTimeout(() => {
-              workOrderFocus.value = false;
-              macFocus.value = true;
-            }, 100);
           }
         }
       });
       vue.watch(() => formData.value.mac_address, (newVal, oldVal) => {
         if (newVal && newVal !== oldVal) {
-          if (newVal.length >= MAX_MAC_LENGTH) {
+          if (newVal.length > MAX_MAC_LENGTH) {
             uni.showToast({
-              title: "灯条码已达到最大长度" + MAX_MAC_LENGTH + "位",
+              title: "灯条码不能超过" + MAX_MAC_LENGTH + "位",
               icon: "none",
               duration: 1500
             });
@@ -7413,7 +7433,7 @@ ${i3}
             userTitles.value = response.data.titles;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/index/bind.vue:190", "获取用户信息失败:", error);
+          formatAppLog("error", "at pages/index/bind.vue:220", "获取用户信息失败:", error);
         }
       };
       const fetchTodayRecords = async () => {
@@ -7442,6 +7462,14 @@ ${i3}
             return;
           if (!formData.value.mac_address.toUpperCase().startsWith("AD1")) {
             formData.value.mac_address = "AD1" + formData.value.mac_address;
+          }
+          if (formData.value.mac_address.toUpperCase() === "AD1") {
+            uni.showToast({
+              title: "请输入完整的灯条码",
+              icon: "none",
+              duration: 2e3
+            });
+            return;
           }
           const response = await uni.request({
             url: `${apiBaseUrl}/api/lightstrip/bind`,

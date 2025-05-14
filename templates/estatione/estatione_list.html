@@ -39,7 +39,12 @@
 
 {% block content %}
 <div class="content-header d-flex justify-content-between align-items-center border-bottom mb-3">
-    <h1 class="h2 py-3 mb-0">基站管理</h1>
+    <div class="d-flex align-items-center">
+        <h1 class="h2 py-3 mb-0 me-3">基站管理</h1>
+        <button id="refresh-status" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-clockwise"></i> 刷新状态
+        </button>
+    </div>
     <a href="{{ url_for('estatione.create') }}" class="btn btn-primary h-fit">
         <i class="bi bi-plus"></i> 添加基站
     </a>
@@ -90,6 +95,9 @@
 
 {% block scripts %}
 <script>
+    // 设备列表数据
+    const devices = JSON.parse('{{ devices_json|safe }}');
+
     // 检测设备在线状态
     function checkDeviceStatus(deviceId, ipAddress) {
         const statusElement = document.getElementById(`status-${deviceId}`);
@@ -117,16 +125,16 @@
 
     // 页面加载完成后检测所有设备状态
     document.addEventListener('DOMContentLoaded', function() {
-        {% for device in devices %}
-            checkDeviceStatus({{ device.id }}, '{{ device.ip_address }}');
-        {% endfor %}
+        devices.forEach(device => {
+            checkDeviceStatus(device.id, device.ipAddress);
+        });
     });
 
     // 添加刷新按钮事件
     function refreshAllStatus() {
-        {% for device in devices %}
-            checkDeviceStatus({{ device.id }}, '{{ device.ip_address }}');
-        {% endfor %}
+        devices.forEach(device => {
+            checkDeviceStatus(device.id, device.ipAddress);
+        });
     }
 
     // 添加刷新按钮

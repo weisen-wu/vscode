@@ -2,17 +2,20 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from database import db
 from models.user import User
 from models.company import Company
+from models.estatione import EStatione
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
 @bp.route('/list')
 def list_users():
     users = User.query.all()
-    return render_template('user/user_list.html', users=users)
+    estationes = EStatione.query.all()
+    return render_template('user/user_list.html', users=users, estationes=estationes)
 
 @bp.route('/create', methods=['GET', 'POST'])
 def create():
     companies = Company.query.all()
+    estationes = EStatione.query.all()
     if request.method == 'POST':
         username = request.form.get('username')
         department = request.form.get('department')
@@ -20,6 +23,7 @@ def create():
         company_id = request.form.get('company_id')
         colors = request.form.get('colors')
         time = request.form.get('time')
+        ap_mac = request.form.get('ap_mac')
         
         if not username or not department or not password or not company_id:
             flash('所有字段都是必填的', 'error')
@@ -31,7 +35,7 @@ def create():
         
         titles = request.form.get('titles')
         user = User(username=username, department=department, company_id=company_id,
-                    colors=colors, time=time if time else None, titles=titles)
+                    colors=colors, time=time if time else None, titles=titles, ap_mac=ap_mac)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
@@ -39,12 +43,13 @@ def create():
         flash('用户创建成功', 'success')
         return redirect(url_for('user.list_users'))
     
-    return render_template('user/user_create.html', companies=companies)
+    return render_template('user/user_create.html', companies=companies, estationes=estationes)
 
 @bp.route('/edit/<int:user_id>', methods=['GET', 'POST'])
 def edit(user_id):
     user = User.query.get_or_404(user_id)
     companies = Company.query.all()
+    estationes = EStatione.query.all()
     
     if request.method == 'POST':
         username = request.form.get('username')
@@ -53,6 +58,7 @@ def edit(user_id):
         company_id = request.form.get('company_id')
         colors = request.form.get('colors')
         time = request.form.get('time')
+        ap_mac = request.form.get('ap_mac')
         
         if not username or not department or not company_id:
             flash('用户名、部门和所属公司是必填的', 'error')
@@ -70,6 +76,7 @@ def edit(user_id):
         user.colors = colors
         user.time = time if time else None
         user.titles = titles
+        user.ap_mac = ap_mac
         if password:
             user.set_password(password)
         
@@ -77,7 +84,7 @@ def edit(user_id):
         flash('用户信息更新成功', 'success')
         return redirect(url_for('user.list_users'))
     
-    return render_template('user/user_edit.html', user=user, companies=companies)
+    return render_template('user/user_edit.html', user=user, companies=companies, estationes=estationes)
 
 @bp.route('/delete/<int:user_id>', methods=['POST'])
 def delete(user_id):

@@ -36,6 +36,7 @@
                     <th>用户名</th>
                     <th>所属部门</th>
                     <th>所属公司</th>
+                    <th>默认基站</th>
                     <th>颜色</th>
                     <th>标签</th>
                     <th>操作</th>
@@ -48,6 +49,7 @@
                     <td>{{ user.username }}</td>
                     <td>{{ user.department }}</td>
                     <td>{{ user.company.name }}</td>
+                    <td>{% if user.ap_mac %}{{ estationes|selectattr('mac_id', 'equalto', user.ap_mac)|map(attribute='location')|first|default('未知位置') }}{% else %}未设置{% endif %}</td>
                     <td>{{ user.colors }}</td>
                     <td>{{ user.titles }}</td>
                     <td>
